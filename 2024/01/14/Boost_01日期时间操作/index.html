@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>01日期和时间操作 | Zdunk的个人博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="01日期和时间操作 | Zdunk的个人博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01日期和时间操作">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Zdunk的个人博客">
+<meta property="og:description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-14T14:07:18.000Z">
+<meta property="article:modified_time" content="2024-01-14T15:11:15.445Z">
+<meta property="article:author" content="Zdunk的个人博客">
+<meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/favicon.ico">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/zenbum.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Zdunk的个人博客</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/Zdunking"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:zhouqi2617@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2388024323&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(3)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="测试">
+            
+            测试
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="Boost">
+            
+            Boost
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 Boost "
+           href="/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="01日期和时间操作">01日期和时间操作</span>
+            <span class="post-date" title="2024-01-14 22:07:18">2024/01/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 Boost "
+           href="/2024/01/13/Boost_00%E5%89%8D%E8%A8%80%E4%B8%8EBoost%E7%9A%84%E7%BC%96%E8%AF%91/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-01Boost前言与编译">Boost-01Boost前言与编译</span>
+            <span class="post-date" title="2024-01-13 16:53:29">2024/01/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 测试 "
+           href="/2024/01/09/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="我的第一篇测试博客">我的第一篇测试博客</span>
+            <span class="post-date" title="2024-01-09 23:03:22">2024/01/09</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Boost_01日期时间操作" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">01日期和时间操作</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Boost">Boost</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-14 23:11:15'>2024-01-14 22:07</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Boost-%E4%B9%8B%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4"><span class="toc-text">Boost 之日期和时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E8%A7%88"><span class="toc-text">总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="toc-text">计时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F"><span class="toc-text">日期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%97%B6%E9%97%B4"><span class="toc-text">关于时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E7%9C%8B%E6%97%B6%E9%97%B4%E6%AE%B5%E7%9A%84%E6%A6%82%E5%BF%B5%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8F%82%E4%B8%8E%E6%97%B6%E9%97%B4%E8%BF%90%E7%AE%97"><span class="toc-text">先看时间段的概念，可以参与时间运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%82%B9%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">时间点的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%8C%BA%E9%97%B4"><span class="toc-text">时间区间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">时间迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B0%8F%E6%A1%88%E4%BE%8B%EF%BC%8C%E5%8F%AF%E5%AE%9E%E7%8E%B0%E6%A0%B9%E6%8D%AE%E6%97%B6%E9%97%B4%E5%91%8A%E8%AF%89%E4%BD%A0%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E4%BA%86%EF%BC%8C%E6%83%B3%E8%B1%A1%E4%B8%80%E4%B8%8B%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E5%AE%9E%E7%8E%B0%E6%B3%A8%E5%86%8C%E4%B8%80%E4%BA%9B%E6%97%A5%E7%A8%8B%EF%BC%8C%E7%94%A8%E6%9D%A5%E4%BD%BF%E7%94%A8"><span class="toc-text">一个日期使用的小案例，可实现根据时间告诉你该做什么了，想象一下，可以方便实现注册一些日程，用来使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%81C-11%E6%96%B0%E5%87%BA%E4%BA%86%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E9%9D%A2%E5%80%BC%E7%89%B9%E6%80%A7%EF%BC%8C%E6%94%AF%E6%8C%81%E9%87%8D%E8%BD%BDoperator%E2%80%9D%E2%80%9D%EF%BC%81"><span class="toc-text">！C++ 11新出了自定义字面值特性，支持重载operator””！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E4%BD%A0%E6%97%A9%E9%83%BD%E6%83%B3%E5%88%B0%E4%BA%86%EF%BC%8C%E5%85%B3%E4%BA%8E%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%8C%E9%82%A3%E5%BD%93%E7%84%B6%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%B2%A1%E6%9C%89%E5%95%A6%EF%BC%8C%E8%BF%99%E9%87%8C%E8%BF%98%E8%83%BD%E7%9C%8B%E5%88%B0C-%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E4%B8%AD%E6%96%87%E8%BE%93%E5%87%BA"><span class="toc-text">可能你早都想到了，关于日期格式化，那当然不可能没有啦，这里还能看到C++怎么处理中文输出</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Boost-之日期和时间"><a href="#Boost-之日期和时间" class="headerlink" title="Boost 之日期和时间"></a>Boost 之日期和时间</h1><h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><blockquote>
+<p>Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。</p>
+<p>Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台</p>
+</blockquote>
+<h2 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h2><blockquote>
+<p>先来看几个好用的计时器</p>
+</blockquote>
+<pre><code class="C++">#include &lt;boost/timer.hpp&gt;
+void test_timer()
+&#123;
+    // 《计时器》 时间记录的对象，用来记录时间流逝，对象初始化时开始计时，精度看起来只到微妙，也有最大时间限制
+    boost::timer t;
+    std::cout &lt;&lt; &quot;max timespan:&quot; &lt;&lt; t.elapsed_max() / 3600 &lt;&lt; &quot;h&quot; &lt;&lt; std::endl;
+    
+    std::cout &lt;&lt; &quot;min timespan:&quot; &lt;&lt; t.elapsed_min() &lt;&lt; &quot;s&quot; &lt;&lt; std::endl;
+
+    Sleep(3000);	//Some 耗时操作
+
+    std::cout &lt;&lt; &quot;now time elapsed:&quot; &lt;&lt; t.elapsed() &lt;&lt; &quot;s&quot; &lt;&lt; std::endl;
+&#125;
+
+</code></pre>
+<blockquote>
+<p>RAII方式的计时器</p>
+</blockquote>
+<pre><code class="C++">#include &lt;boost/progress.hpp&gt;
+#include &lt;sstream&gt;
+void test_progress_timer()
+&#123;
+    std::stringstream ss;
+    &#123;
+        boost::progress_timer pt(ss);	//继承自timer 构造参数默认是std::cout
+        Sleep(1000);
+        std::cout &lt;&lt; &quot;something done！&quot; &lt;&lt; std::endl;
+    &#125;
+    std::cout &lt;&lt; &quot;done over! time:&quot; &lt;&lt; ss.str() &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<blockquote>
+<p>一个有点意思的进度显示器，这个作用还是有的，可以在日志里记录文件下载或写入进度，帮助排查问题</p>
+</blockquote>
+<pre><code class="C++">void test_progress_display()
+&#123;
+    //有点作用，如:通过如日志记录文件下载的进度
+    std::stringstream ss;
+    static const int MAX_BASE_TIME = 100;
+    boost::progress_display pd(MAX_BASE_TIME, ss, &quot;总进度  :&quot; , &quot;进度条  :&quot;, &quot;当前进度:&quot;);
+    for (auto i = 0; i &lt; MAX_BASE_TIME; ++i)
+    &#123;
+        Sleep(100);
+        ++pd;
+        std::cout &lt;&lt; ss.str() &lt;&lt; std::endl;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h2><blockquote>
+<p>话不多说，上代码</p>
+</blockquote>
+<pre><code class="C++">//关于日期 记录日期有极限(1400-01-01~9999-12-31)
+#include &lt;boost/date_time/gregorian/gregorian.hpp&gt;		//处理日期
+void test_date_time()
+&#123;
+    //以gregorian(格力高日历)为基础，命名空间的由来,获取今天的日期
+    std::cout &lt;&lt; boost::gregorian::day_clock::local_day() &lt;&lt; std::endl;
+    std::cout &lt;&lt; boost::gregorian::day_clock::universal_day() &lt;&lt; std::endl;
+    
+    /* 都是一些日期的对象，可以参与运算
+    * boost::gregorian::date d(2022,4,18)
+    * boost::gregorian::years y(10);
+    * boost::gregorian::months y(10);
+    * boost::gregorian::weeks y(10);
+    * boost::gregorian::days y(10);
+    */
+
+    typedef boost::gregorian::date Date;	//值得一提的是，它重载了&gt; &lt; =运算符，支持比较运算
+    std::cout &lt;&lt; Date(2024, 1, 13) &lt;&lt; std::endl;
+    std::cout &lt;&lt; Date(2024, 1, 13).year() &lt;&lt; std::endl;
+    std::cout &lt;&lt; Date(2024, 1, 13).month() &lt;&lt; std::endl;
+    std::cout &lt;&lt; Date(2024, 1, 13).day() &lt;&lt; std::endl;
+    std::cout &lt;&lt; Date(2024, 1, 13).day_count() &lt;&lt; std::endl;//过了多少年
+    std::cout &lt;&lt; Date(2024, 1, 13).day_number() &lt;&lt; std::endl;//过了多少年
+    std::cout &lt;&lt; Date(2024, 1, 13).day_of_week() &lt;&lt; std::endl;//星期几
+    std::cout &lt;&lt; Date(2024, 1, 13).day_of_year() &lt;&lt; std::endl;//过了多少天了
+    std::cout &lt;&lt; Date(2024, 1, 13).week_number() &lt;&lt; std::endl;//这个月过了几周
+
+    //可以与std::tm进行互转
+    Date d(2024, 2, 13);
+    std::tm tm = boost::gregorian::to_tm(d);
+    Date d2 = boost::gregorian::date_from_tm(tm);
+    std::cout &lt;&lt; d2 &lt;&lt; std::endl;
+    /* std::tm 的结构
+    * std::tm
+    struct tm
+    &#123;
+        int tm_sec;   // seconds after the minute - [0, 60] including leap second
+        int tm_min;   // minutes after the hour - [0, 59]
+        int tm_hour;  // hours since midnight - [0, 23]
+        int tm_mday;  // day of the month - [1, 31]
+        int tm_mon;   // months since January - [0, 11]
+        int tm_year;  // years since 1900
+        int tm_wday;  // days since Sunday - [0, 6]
+        int tm_yday;  // days since January 1 - [0, 365]
+        int tm_isdst; // daylight savings time flag
+    &#125;;
+    */
+
+
+    //日期段 date_period
+    boost::gregorian::date_period dp(Date(2022, 4, 18), Date(2024, 1, 13));
+    std::cout &lt;&lt; dp &lt;&lt; std::endl;
+    boost::gregorian::date_period dp1(Date(2022, 4, 28), boost::gregorian::date_duration(365*2));
+    std::cout &lt;&lt; dp1 &lt;&lt; std::endl;
+
+    //两端延长
+    dp.expand(boost::gregorian::date_duration(365));
+    std::cout &lt;&lt; dp &lt;&lt; std::endl;
+    //平移
+    dp.shift(boost::gregorian::date_duration(365));
+    std::cout &lt;&lt; dp &lt;&lt; std::endl;
+    /*
+    * date_duration的一些成员函数， 返回bool值(除intersection)
+    * is_before()/is_after() 区间是否在日期前、后
+    * contains() 是否包含
+    * intersects() 是否存在交集
+    * intersection() 返回交集，无交集返回无效区间
+    * is_adjacent() 日期区间是否相邻
+    */
+
+    //日期“迭代器”，很哇塞
+    std::cout &lt;&lt; &quot;[日期迭代器的使用]:&quot; &lt;&lt; std::endl;
+    //这里的迭代器和真正的迭代器仍然有差距，缺少differ_type,pointer,reference
+    Date d3(2022, 4, 18);
+    boost::gregorian::day_iterator di(d3);	
+    boost::gregorian::week_iterator wi(d3);
+    boost::gregorian::month_iterator mi(d3);
+    boost::gregorian::year_iterator yi(d3);
+
+    static const int MAX_ITERATER_COUNT = 3;
+    std::cout &lt;&lt; &quot;day iterater:&quot; &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; MAX_ITERATER_COUNT; i++)
+    &#123;
+        ++di; //只支持前置运算
+        std::cout &lt;&lt; di-&gt;year() &lt;&lt; &quot;-&quot; &lt;&lt; di-&gt;month() &lt;&lt; &quot;-&quot; &lt;&lt; di-&gt;day() &lt;&lt; std::endl;
+    &#125;
+
+    std::cout &lt;&lt; &quot;week iterater:&quot; &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; MAX_ITERATER_COUNT; i++)
+    &#123;
+        ++wi; //只支持前置运算
+        std::cout &lt;&lt; wi-&gt;year() &lt;&lt; &quot;-&quot; &lt;&lt; wi-&gt;month() &lt;&lt; &quot;-&quot; &lt;&lt; wi-&gt;day() &lt;&lt; std::endl;
+    &#125;
+
+    std::cout &lt;&lt; &quot;month iterater:&quot; &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; MAX_ITERATER_COUNT; i++)
+    &#123;
+        ++mi; //只支持前置运算
+        std::cout &lt;&lt; mi-&gt;year() &lt;&lt; &quot;-&quot; &lt;&lt; mi-&gt;month() &lt;&lt; &quot;-&quot; &lt;&lt; mi-&gt;day() &lt;&lt; std::endl;
+    &#125;
+
+    std::cout &lt;&lt; &quot;year iterater:&quot; &lt;&lt; std::endl;
+    for (size_t i = 0; i &lt; MAX_ITERATER_COUNT; i++)
+    &#123;
+        ++yi; //只支持前置运算
+        std::cout &lt;&lt; yi-&gt;year() &lt;&lt; &quot;-&quot; &lt;&lt; yi-&gt;month() &lt;&lt; &quot;-&quot; &lt;&lt; yi-&gt;day() &lt;&lt; std::endl;
+    &#125;
+
+    //闰年的一些计算
+    std::cout &lt;&lt; &quot;year 2024 is &quot; &lt;&lt; (boost::gregorian::gregorian_calendar::is_leap_year(2024) ? &quot;&quot; : &quot;not &quot;)
+        &lt;&lt; &quot;a leap year&quot; &lt;&lt; std::endl;
+
+    std::cout &lt;&lt; &quot;year 2024 eng of Feb has [&quot; 
+        &lt;&lt; boost::gregorian::gregorian_calendar::end_of_month_day(2024, 2) &lt;&lt; &quot;] days&quot; &lt;&lt; std::endl;
+
+&#125;
+</code></pre>
+<h2 id="关于时间"><a href="#关于时间" class="headerlink" title="关于时间"></a>关于时间</h2><blockquote>
+<p>和之后的chrono在理念上相同</p>
+</blockquote>
+<h3 id="先看时间段的概念，可以参与时间运算"><a href="#先看时间段的概念，可以参与时间运算" class="headerlink" title="先看时间段的概念，可以参与时间运算"></a>先看时间段的概念，可以参与时间运算</h3><pre><code class="C++">//关于时间，std::chrono似乎有了更好的方案
+#include &lt;boost/date_time/posix_time/posix_time.hpp&gt;	//处理时间
+#define BOOST_DATE_TIME_POSIX_TIME_STD_CONFIG //boost上支持纳秒的宏
+//时间段
+void test_time_duration()
+&#123;
+    
+    boost::posix_time::time_duration td(1,10,30,1000);
+    std::cout &lt;&lt; td &lt;&lt; std::endl;
+    //下面都是子类，time_duration可以进行运算,构造函数可以传入负数
+    boost::posix_time::hours hour(1);
+    boost::posix_time::minutes minu(1);
+    boost::posix_time::seconds sec(1);
+    boost::posix_time::milliseconds millisec(1); //some as boost::posix_time::millisec
+    boost::posix_time::microseconds mircsec(1); //same as boost::posix_time::microsec
+    boost::posix_time::nanoseconds nanosec(1); //same as boost::posix_time::nanosec
+    std::cout &lt;&lt; td + hour + minu + sec + millisec + mircsec + nanosec &lt;&lt; std::endl;
+
+&#125;
+</code></pre>
+<h3 id="时间点的概念"><a href="#时间点的概念" class="headerlink" title="时间点的概念"></a>时间点的概念</h3><pre><code class="C++">//时间点
+void test_ptime()
+&#123;
+    //ptime 类似与date，可以进行高效的拷贝赋值，支持全序比较和赋值
+    //ptime相当于 ptime+time_duration
+    std::cout &lt;&lt; boost::posix_time::second_clock::local_time() &lt;&lt; std::endl; //调用universal_time()一般情况下也一样
+    std::cout &lt;&lt; boost::posix_time::microsec_clock::local_time() &lt;&lt; std::endl;
+
+    typedef boost::gregorian::date Date;
+    typedef boost::posix_time::ptime PTime;
+    
+
+    PTime pt(Date(2022,4,18), boost::posix_time::time_duration(1, 10, 30, 1000));
+    std::cout &lt;&lt; pt + boost::gregorian::days(10) + boost::gregorian::years(1) + boost::posix_time::hours(10) &lt;&lt; std::endl;
+    std::cout &lt;&lt; pt.date() &lt;&lt; std::endl;	//年月日
+    std::cout &lt;&lt; boost::posix_time::from_time_t(std::time(0)).date() &lt;&lt; std::endl;// 支持从time_t单向转换
+&#125;
+</code></pre>
+<h3 id="时间区间"><a href="#时间区间" class="headerlink" title="时间区间"></a>时间区间</h3><pre><code class="C++">void test_time_peroid()
+&#123;
+    typedef boost::gregorian::date Date;
+    typedef boost::posix_time::ptime PTime;
+
+    PTime pt(Date(2022, 4, 18), boost::posix_time::time_duration(1, 10, 30, 1000));
+    //此处区分时间段和时间区间的区别，字面意思
+    boost::posix_time::time_period tp(pt, boost::posix_time::hours(8));
+    std::cout &lt;&lt; tp &lt;&lt; std::endl;
+
+    //两端延长
+    tp.expand(boost::posix_time::hours(36));
+    std::cout &lt;&lt; tp &lt;&lt; std::endl;
+    //平移
+    tp.shift(boost::posix_time::minutes(30));
+    std::cout &lt;&lt; tp &lt;&lt; std::endl;
+    /*
+    * date_duration的一些成员函数， 返回bool值(除intersection)
+    * is_before()/is_after() 区间是否在日期前、后
+    * contains() 是否包含
+    * intersects() 是否存在交集
+    * intersection() 返回交集，无交集返回无效区间
+    * is_adjacent() 日期区间是否相邻
+    */
+&#125;
+</code></pre>
+<h3 id="时间迭代器"><a href="#时间迭代器" class="headerlink" title="时间迭代器"></a>时间迭代器</h3><pre><code class="C++">void test_time_iterator()
+&#123;
+    typedef boost::gregorian::date Date;
+    typedef boost::posix_time::ptime PTime;
+
+    PTime pt(Date(2022, 4, 18), boost::posix_time::time_duration(1, 10, 30, 1000));
+
+    typedef boost::posix_time::time_iterator ti;
+    for (ti it(pt, boost::posix_time::minutes(10)); it &lt; pt + boost::posix_time::hours(1); ++it )
+    &#123;
+        std::cout &lt;&lt; *it &lt;&lt; std::endl;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="一个日期使用的小案例，可实现根据时间告诉你该做什么了，想象一下，可以方便实现注册一些日程，用来使用"><a href="#一个日期使用的小案例，可实现根据时间告诉你该做什么了，想象一下，可以方便实现注册一些日程，用来使用" class="headerlink" title="一个日期使用的小案例，可实现根据时间告诉你该做什么了，想象一下，可以方便实现注册一些日程，用来使用"></a>一个日期使用的小案例，可实现根据时间告诉你该做什么了，想象一下，可以方便实现注册一些日程，用来使用</h3><pre><code class="C++">//一个日期使用的小案例
+#include &lt;map&gt;
+void test_time_example()
+&#123;
+    typedef boost::posix_time::ptime PTime;
+    typedef boost::posix_time::time_period time_period;
+    PTime pt(boost::gregorian::day_clock::local_day());
+
+    static std::map&lt;time_period, std::string&gt; s_map = &#123;
+        &#123;time_period(pt, boost::posix_time::hours(9)),&quot;睡大觉时间&quot;&#125;,
+        &#123;time_period(pt + boost::posix_time::hours(9), boost::posix_time::hours(3) + boost::posix_time::minutes(30)),&quot;早上上班&quot;&#125;,
+        &#123;time_period(pt + boost::posix_time::hours(12) + boost::posix_time::minutes(30), boost::posix_time::hours(1)),&quot;午餐时间咯&quot;&#125;,
+        &#123;time_period(pt + boost::posix_time::hours(13) + boost::posix_time::minutes(30), boost::posix_time::hours(4) + boost::posix_time::minutes(30)),&quot;下午茶时间&quot;&#125;,
+        &#123;time_period(pt + boost::posix_time::hours(18), boost::posix_time::hours(6)),&quot;争取干完，干不完回家明天继续&quot;&#125;
+    &#125;;
+
+    auto funcx = [=](PTime pt) &#123;
+        for (auto &amp; i : s_map)
+        &#123;
+            if (i.first.contains(pt))
+            &#123;
+                std::cout &lt;&lt; i.second &lt;&lt; std::endl;
+            &#125;
+        &#125;
+    &#125;;
+
+    funcx(boost::posix_time::second_clock::local_time());
+    funcx(boost::posix_time::second_clock::local_time() + boost::posix_time::hours(16));
+&#125;
+</code></pre>
+<h3 id="！C-11新出了自定义字面值特性，支持重载operator””！"><a href="#！C-11新出了自定义字面值特性，支持重载operator””！" class="headerlink" title="！C++ 11新出了自定义字面值特性，支持重载operator””！"></a>！C++ 11新出了自定义字面值特性，支持重载operator””！</h3><pre><code class="C++">//C++11自定义字面值特性
+boost::gregorian::days operator&quot;&quot; _D(unsigned long long n)
+&#123;
+    return boost::gregorian::days(n);
+&#125;
+boost::gregorian::weeks operator&quot;&quot; _W(unsigned long long n)
+&#123;
+    return boost::gregorian::weeks(n);
+&#125;
+boost::gregorian::date operator&quot;&quot; _YMD(const char* s, size_t)
+&#123;
+    return boost::gregorian::from_string(s);
+&#125;
+void test_define_value_new()
+&#123;
+    std::cout &lt;&lt; (100_D).days() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;2022-4-18&quot;_YMD &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<h3 id="可能你早都想到了，关于日期格式化，那当然不可能没有啦，这里还能看到C-怎么处理中文输出"><a href="#可能你早都想到了，关于日期格式化，那当然不可能没有啦，这里还能看到C-怎么处理中文输出" class="headerlink" title="可能你早都想到了，关于日期格式化，那当然不可能没有啦，这里还能看到C++怎么处理中文输出"></a>可能你早都想到了，关于日期格式化，那当然不可能没有啦，这里还能看到C++怎么处理中文输出</h3><pre><code class="C++">//时间日期格式化
+void test_time_format()
+&#123;
+    boost::gregorian::date d(2022, 4, 18);
+    boost::gregorian::date_facet* dfact = new boost::gregorian::date_facet(&quot;%Y年%m月%d日&quot;);
+    std::cout.imbue(std::locale(std::cout.getloc(), dfact));
+    std::cout &lt;&lt; d &lt;&lt; std::endl;
+
+    typedef boost::posix_time::ptime PTime;
+    boost::posix_time::time_facet* tfact = new boost::posix_time::time_facet(&quot;%Y年%m月%d日%H时%M分%S%F秒&quot;);
+    std::cout.imbue(std::locale(std::cout.getloc(), tfact));
+    std::cout &lt;&lt; PTime(d, boost::posix_time::hours(12) + boost::posix_time::minutes(30)) &lt;&lt; std::endl;
+&#125;
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
