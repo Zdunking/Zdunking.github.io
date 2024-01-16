@@ -6,15 +6,15 @@
   <meta name="keywords" content="">
   <meta name="description" content="Boost-00前言与编译 | Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta name="description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boost_01日期时间操作">
-<meta property="og:url" content="http://zdunking.github.io/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:title" content="一个插件系统的实现构想">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/16/project_PluginSystem/index.html">
 <meta property="og:site_name" content="Zdunk的个人博客">
-<meta property="og:description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta property="og:description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-14T14:07:18.000Z">
-<meta property="article:modified_time" content="2024-01-14T15:22:18.548Z">
+<meta property="article:published_time" content="2024-01-16T14:28:32.000Z">
+<meta property="article:modified_time" content="2024-01-16T17:58:43.374Z">
 <meta property="article:author" content="Zdunk的个人博客">
 <meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
 <meta name="twitter:card" content="summary">
@@ -125,11 +125,26 @@
             
                 
     <li>
-        <div data-rel="测试">
-            
-            测试
-            <small>(1)</small>
+        <div data-rel="开源工具项目">
+            <i class="fold iconfont icon-right"></i>
+            开源工具项目
+            <small>(2)</small>
         </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="开源工具项目&lt;---&gt;Boost">
+            
+            Boost
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
         
     </li>
 
@@ -140,14 +155,18 @@
             
                 
     <li>
-        <div data-rel="Boost">
+        <div data-rel="项目实战">
             
-            Boost
-            <small>(2)</small>
+            项目实战
+            <small>(1)</small>
         </div>
         
     </li>
 
+            
+        
+    
+        
             
         
     
@@ -222,7 +241,16 @@
     <nav id="title-list-nav">
         
         
-        <a  class="全部文章 Boost "
+        <a  class="全部文章 项目实战 "
+           href="/2024/01/16/project_PluginSystem/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一个插件系统的实现构想">一个插件系统的实现构想</span>
+            <span class="post-date" title="2024-01-16 22:28:32">2024/01/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
            href="/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"
            data-tag=""
            data-author="" >
@@ -231,21 +259,12 @@
         </a>
         
         
-        <a  class="全部文章 Boost "
+        <a  class="全部文章 开源工具项目 Boost "
            href="/2024/01/13/Boost_00%E5%89%8D%E8%A8%80%E4%B8%8E%E7%BC%96%E8%AF%91/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="Boost-00前言与编译">Boost-00前言与编译</span>
             <span class="post-date" title="2024-01-13 16:53:29">2024/01/13</span>
-        </a>
-        
-        
-        <a  class="全部文章 测试 "
-           href="/2024/01/09/hello-world/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="我的第一篇测试博客">我的第一篇测试博客</span>
-            <span class="post-date" title="2024-01-09 23:03:22">2024/01/09</span>
         </a>
         
         <div id="no-item-tips">
@@ -278,7 +297,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="Boost">Boost</a>
+            <a  data-rel="开源工具项目">开源工具项目</a> > 
+            
+            <a  data-rel="开源工具项目&lt;---&gt;Boost">Boost</a>
             
         </span>
         
@@ -286,7 +307,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-01-14 23:23:59'>2024-01-13 16:53</time>
+            发布时间 : <time class="date" title='最后更新: 2024-01-16 22:23:36'>2024-01-13 16:53</time>
         
     </div>
     <div class="article-meta">

@@ -2,19 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>我的第一篇测试博客 | Zdunk的个人博客</title>
+  <title>Zdunk的个人博客</title>
   <meta name="keywords" content="">
-  <meta name="description" content="我的第一篇测试博客 | Zdunk的个人博客">
+  <meta name="description" content="Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta name="description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Boost_01日期时间操作">
-<meta property="og:url" content="http://zdunking.github.io/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:title" content="一个插件系统的实现构想">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/16/project_PluginSystem/index.html">
 <meta property="og:site_name" content="Zdunk的个人博客">
-<meta property="og:description" content="Boost 之日期和时间总览 Boost中将时间（广义的）分为日期(1999-9-11)和时间(20:00:00)两个处理维度，关于日期boost提供格力高日历表示方法，在后面的命名空间中有所体现。关于时间现在标准库已经提供了std::chrono，boost里除了chronoa还有精度差一些的时间date_time。 Boost为两者都提供了，点、段、区间的概念、使用很方便且跨平台  计时器 先">
+<meta property="og:description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-14T14:07:18.000Z">
-<meta property="article:modified_time" content="2024-01-14T15:22:18.548Z">
+<meta property="article:published_time" content="2024-01-16T14:28:32.000Z">
+<meta property="article:modified_time" content="2024-01-16T17:58:43.374Z">
 <meta property="article:author" content="Zdunk的个人博客">
 <meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
 <meta name="twitter:card" content="summary">
@@ -57,7 +57,7 @@
 
 
 <body>
-<aside class="nav">
+<aside class="nav mobile">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -125,11 +125,26 @@
             
                 
     <li>
-        <div data-rel="测试">
-            
-            测试
-            <small>(1)</small>
+        <div data-rel="开源工具项目">
+            <i class="fold iconfont icon-right"></i>
+            开源工具项目
+            <small>(2)</small>
         </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="开源工具项目&lt;---&gt;Boost">
+            
+            Boost
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
         
     </li>
 
@@ -140,14 +155,18 @@
             
                 
     <li>
-        <div data-rel="Boost">
+        <div data-rel="项目实战">
             
-            Boost
-            <small>(2)</small>
+            项目实战
+            <small>(1)</small>
         </div>
         
     </li>
 
+            
+        
+    
+        
             
         
     
@@ -222,7 +241,16 @@
     <nav id="title-list-nav">
         
         
-        <a  class="全部文章 Boost "
+        <a  class="全部文章 项目实战 "
+           href="/2024/01/16/project_PluginSystem/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一个插件系统的实现构想">一个插件系统的实现构想</span>
+            <span class="post-date" title="2024-01-16 22:28:32">2024/01/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
            href="/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"
            data-tag=""
            data-author="" >
@@ -231,21 +259,12 @@
         </a>
         
         
-        <a  class="全部文章 Boost "
+        <a  class="全部文章 开源工具项目 Boost "
            href="/2024/01/13/Boost_00%E5%89%8D%E8%A8%80%E4%B8%8E%E7%BC%96%E8%AF%91/"
            data-tag=""
            data-author="" >
             <span class="post-title" title="Boost-00前言与编译">Boost-00前言与编译</span>
             <span class="post-date" title="2024-01-13 16:53:29">2024/01/13</span>
-        </a>
-        
-        
-        <a  class="全部文章 测试 "
-           href="/2024/01/09/hello-world/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="我的第一篇测试博客">我的第一篇测试博客</span>
-            <span class="post-date" title="2024-01-09 23:03:22">2024/01/09</span>
         </a>
         
         <div id="no-item-tips">
@@ -264,51 +283,12 @@
         </div>
     </div>
 </aside>
-<div id="post">
+<div id="post" class="index">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article class="index">
+            <div class="toc-ref">
     
-        <h1 class="article-title">我的第一篇测试博客</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="测试">测试</a>
-            
-        </span>
-        
-        
-    </div>
-    <div class="article-meta">
-        
-            发布时间 : <time class="date" title='最后更新: 2024-01-09 23:22:21'>2024-01-09 23:03</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        
-        <span id="busuanzi_container_page_pv">
-            阅读 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-Hexo-Blog"><span class="toc-text">Hello Hexo Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">一个二级标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98-1"><span class="toc-text">一个二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">一个三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%9B%9B%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="toc-text">一个四级标题</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91"><span class="toc-text">关于我</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -321,58 +301,76 @@
     }
 </style>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Hello-Hexo-Blog"><a href="#Hello-Hexo-Blog" class="headerlink" title="Hello Hexo Blog"></a>Hello Hexo Blog</h1><pre><code class="c++">#include &lt;string&gt;
-class TestClass : noncoyable
-&#123;
-    TestClass()&#123;&#125;
-    ~TestClass()&#123;&#125;
-&#125;
+            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​		本站记录一些平时的工作学习的感悟和心得，作为个人的笔记站存在。计算机科学的世界纷繁庞大，每学习到一个新的知识，接触到一个新的领域，惊奇的同时又感叹于工程师伟大。恨不得把它们全都学会，但是工作接触项目才发现，一个软件工程，可能倾注了一个庞大项目组N多年的心血，所以学习者更需一步一个脚印，吃透知识，方可融汇贯通。</p>
+<p>​		虽然但是，还是想说，软件世界解决问题的方式虽多，却有迹可循，设计模式、架构思维，在深入细节过后回头来看，隐隐觉得细节变得不那么重要了。只是谁又能说完全的掌控全局呢？对于博客记录来说，仍然是一个积累的过程。所谓千里之行，始于足下，peace！</p>
+<p>​		下面根据知识类别做出划分，后续继续完善。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><blockquote>
+<p>语言</p>
+<p>​	1.C++</p>
+<p>​	2.JavaScript</p>
+<p>​	3.Go</p>
+</blockquote>
+<blockquote>
+<p>设计模式</p>
+<p>​	创建型</p>
+<p>​	结构型</p>
+<p>​	行为型</p>
+</blockquote>
+<blockquote>
+<p>Windows平台</p>
+<p>​	1.调试与Windbg专题</p>
+<p>​	2.CommonLib的封装</p>
+<p>​	3.逆向技术</p>
+<p>​	4.驱动技术</p>
+</blockquote>
+<blockquote>
+<p>Linux平台</p>
+<p>​	1.Linux那些强大的命令</p>
+<p>​	2.CommonLib的封装</p>
+</blockquote>
+<blockquote>
+<p>GUI</p>
+<p>​	1.MFC</p>
+<p>​	2.ATL</p>
+<p>​	3.WTL</p>
+<p>​	4.duilib</p>
+<p>​	5.electron		</p>
+<p>​	6.Qt</p>
+<p>​	7.GacUI</p>
+</blockquote>
+<blockquote>
+<p>前端技术</p>
+<p>​	1.WebPack</p>
+<p>​	2.JQuery</p>
+<p>​	3.Vue</p>
+<p>​	4.React</p>
+</blockquote>
+<blockquote>
+<p>项目实例</p>
+<p>​	1.高并发服务器实战</p>
+<p>​	2.高性能异步日志库的实现</p>
+<p>​	3.高性能注册与派发系统的实现</p>
+<p>​	4.一个插件系统的实现构想</p>
+</blockquote>
+<blockquote>
+<p>运维</p>
+<p>​	1.docker</p>
+<p>​	2.微服务</p>
+</blockquote>
+<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题   <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
+<p>主要功能：</p>
+<ul>
+<li>搜索支持文章标题、标签</li>
+<li>pad&#x2F;手机等移动端适配</li>
+</ul>
 
-int main()
-&#123;
-    return 0;
-&#125;
-</code></pre>
-<pre><code class="bat">echo &quot;hello world&quot; &lt;&lt; 1.txt
-</code></pre>
-<h2 id="一个二级标题"><a href="#一个二级标题" class="headerlink" title="一个二级标题"></a>一个二级标题</h2><h2 id="一个二级标题-1"><a href="#一个二级标题-1" class="headerlink" title="一个二级标题"></a>一个二级标题</h2><h3 id="一个三级标题"><a href="#一个三级标题" class="headerlink" title="一个三级标题"></a>一个三级标题</h3><h4 id="一个四级标题"><a href="#一个四级标题" class="headerlink" title="一个四级标题"></a>一个四级标题</h4><table>
-<thead>
-<tr>
-<th>表头1</th>
-<th>表头2</th>
-<th>表头三</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>C++</td>
-<td>Go</td>
-<td>JavaScript</td>
-</tr>
-</tbody></table>
-
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
-    </div>
-</article>
-
-
-<p>
-    <a  class="dashang" onclick="dashangToggle()">赏</a>
-</p>
-
-
-
-
-
-
-    
-
-
-
-
+        </article>
+        
+        <p>
+            <a  class="dashang" onclick="dashangToggle()">赏</a>
+        </p>
+        
+        
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -381,11 +379,11 @@ int main()
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-    <div class="full-toc">
-        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+</div>
+<div class="full-toc">
+    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
-    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>一个插件系统的实现构想 | Zdunk的个人博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="一个插件系统的实现构想 | Zdunk的个人博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个插件系统的实现构想">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/16/project_PluginSystem/index.html">
+<meta property="og:site_name" content="Zdunk的个人博客">
+<meta property="og:description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-16T14:28:32.000Z">
+<meta property="article:modified_time" content="2024-01-16T17:58:43.374Z">
+<meta property="article:author" content="Zdunk的个人博客">
+<meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/favicon.ico">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/zenbum.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Zdunk的个人博客</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/Zdunking"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:zhouqi2617@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2388024323&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(3)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="开源工具项目">
+            <i class="fold iconfont icon-right"></i>
+            开源工具项目
+            <small>(2)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="开源工具项目&lt;---&gt;Boost">
+            
+            Boost
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="项目实战">
+            
+            项目实战
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 项目实战 "
+           href="/2024/01/16/project_PluginSystem/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一个插件系统的实现构想">一个插件系统的实现构想</span>
+            <span class="post-date" title="2024-01-16 22:28:32">2024/01/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/14/Boost_01%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost_01日期时间操作">Boost_01日期时间操作</span>
+            <span class="post-date" title="2024-01-14 22:07:18">2024/01/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/13/Boost_00%E5%89%8D%E8%A8%80%E4%B8%8E%E7%BC%96%E8%AF%91/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-00前言与编译">Boost-00前言与编译</span>
+            <span class="post-date" title="2024-01-13 16:53:29">2024/01/13</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-project_PluginSystem" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">一个插件系统的实现构想</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="项目实战">项目实战</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-17 01:58:43'>2024-01-16 22:28</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">一个插件系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%80%BB%E4%BD%93%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-text">一、总体的设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Application%E7%B1%BB"><span class="toc-text">二、Application类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Core%E7%B1%BB"><span class="toc-text">Core类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CorePlugin%E6%9C%8D%E5%8A%A1"><span class="toc-text">CorePlugin服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%BC%80%E5%BF%83%E5%BF%83%E7%9A%84%E5%81%9A%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6"><span class="toc-text">开开心心的做一个插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="toc-text">写在后面</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一个插件系统的实现"><a href="#一个插件系统的实现" class="headerlink" title="一个插件系统的实现"></a>一个插件系统的实现</h1><blockquote>
+<p>​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人能力还是有限，结合平时的工作和学习，体会出一个可行的方案。如有疑问，欢迎交流。</p>
+</blockquote>
+<h3 id="一、总体的设计思路"><a href="#一、总体的设计思路" class="headerlink" title="一、总体的设计思路"></a>一、总体的设计思路</h3><p>​		首先，对于一个（插件）系统来说，他首先能对外提供一些能力，就像操作系统一样，它提供了进程管理，内存管理等系列的能力，基于操作系统的任何程序，都可以看做是操作系统的扩展，或者说插件，帮助人们更好的利用操作系统去工作。由此我认为，一个好的插件系统首要的是能提供基础的能力，而插件能基于这些底层能力去做扩展，或者说做业务的实现。另外还要考虑的一点是，基础能力对于 不同的业务软件是不同的，可能相似，但绝不相同，那么我们可能需要适用不同的业务场景，这时基础能力的可配置也需要解决，后面我也针对此提供一种解决方案。</p>
+<p>​		其次，要考虑的是，如何设计良好的接口实现。保证插件良好的获取框架提供的能力，包括插件和框架进行通信，以及插件和插件之间进行信息传递。这个设计显得尤为重要，试想一个大型的项目在开发了很久发现接口很不好用，消息传递很麻烦，那会很令人感到无力。</p>
+<p>​		例如：如果我们要开发一个服务器程序，那么框架部分，我们就应该提供基础的Http，Tcp,等网络报文解析和接收发送能力，提供良好的IO处理能力和连接并发能力，并设计出使得使用方能够方便使用的接口。这样，每一个插件具有这样的能力，只要符合框架的接口，那么便可以基于此做出任何想要的逻辑。</p>
+<p>​		再例如：我们想实现一个类似UTools的工具管理软件，首要的其实是提供一个基础的界面，界面上的一个个工具就是一个个的插件，一个插件写好后，可以配置进管理软件，框架需要从插件中获取插件的信息，包括插件版本、插件的描述、当插件被点击时，插件开始工作，可以通过预留PluginInit()、PluginStart()这样的接口完成插件的初始化和启动。</p>
+<p>​		学习过Vue这样的一些前端开发框架的话，可以看到一些生命周期的概念，提供一些预留的接口，通过覆写这些生命周期函数、便能很好的在框架的一些中间过程注入代码，为丰富框架提供了更好的实现。我也想借用Vue里面一些优秀的概念，结合在工作学习中的一些体会，搞一个基本的插件框架出来。</p>
+<h3 id="二、Application类"><a href="#二、Application类" class="headerlink" title="二、Application类"></a>二、Application类</h3><p>​		程序需要一个入口类，类似这样的代码(简单演示)：</p>
+<pre><code class="C++">int main(int argc, char** argv, char** envs)
+&#123;
+    Application app;
+    app.init(argc, argv, envs);
+    app.run();
+    return 0;
+&#125;
+</code></pre>
+<p>​	实现一个Application类</p>
+<blockquote>
+<p>​		实现一个<code>app</code>，那么Application需要做哪些事情？首要的其实是解析命令行，外部的命令对内部的实现有很大的影响，而这个命令行参数，只能事先定义好，通过告知用户使用来实现，例如可能需要进程后台运行、程序触发自更新，触发缓存文件清理等等，根据业务逻辑进行处理就好。可以搞成全局变量，也可以搞成Application的成员变量。可以使用开源的Gflags…</p>
+</blockquote>
+<blockquote>
+<p>​		接着就直接加载插件吗？我认为不然，如果你的程序是一个界面程序，那么可能需要创建一个界面，在主线程做消息循环等这样的操作、当然不止于此，可能还有很多要做的。于是乎，我们抽离出一个Core组件，用来实现，作为Application的成员，以组合的方式提供Core（核心能力）。</p>
+</blockquote>
+<pre><code class="C++">//这个东西最好做成单例
+class Application
+&#123;
+public:
+    bool init(int argc, char** argv, char** envs);
+    bool run();
+private:
+    std::map&lt;std::sting, std::string&gt; m_cmdConfigs;
+    Core m_core;
+&#125;;
+</code></pre>
+<blockquote>
+<p>紧接着，问题来了，Core怎么实现？这下该加载插件了吧？</p>
+</blockquote>
+<h3 id="Core类"><a href="#Core类" class="headerlink" title="Core类"></a>Core类</h3><p>​		其实直接在Core类中做插件仍然不对，我们提到过，框架加载插件首先需要框架提供出底层的能力，服务器框架提供数据收发和连接管理的能力，工具管理软件提供出主界面的逻辑，于是乎，我们在Core里面做什么事情呢？那就是加载底层能力，底层能力可想而知，复杂多变，于是乎，我们需要把他做成可配置的。配置文件多种多样，<code>Json</code>、<code>Xml</code>、<code>Yaml</code>、你还可以把他搞成加密的，主要是，我们需要器加载底层能力，提供一个简单的实例，体会一下：</p>
+<pre><code class="json">#Core组件加载配置
+&#123;
+    [
+        &#123;	
+            #通信基础组件
+            &quot;server&quot; : &quot;CoreNetManager,
+            &quot;entry&quot; : &quot;CreateCoreService&quot;
+            &quot;param&quot;:[&#123;&quot;key1&quot;:&quot;value1&quot;&#125;, &#123;&quot;key2&quot;:&quot;value2&quot;&#125;]
+        &#125;,
+        &#123;
+            #上报基础组件
+            &quot;server&quot;:&quot;CoreReport&quot;,
+            &quot;entry&quot;:&quot;&quot;,	#缺省可有默认值
+            &quot;param&quot;:[&#123;&quot;key1&quot;:&quot;value1&quot;&#125;, &#123;&quot;key2&quot;:&quot;value2&quot;&#125;]
+        &#125;,
+        &#123;
+            #插件基础组件
+            &quot;server&quot;:&quot;CorePlugin&quot;
+            &quot;entry&quot;:&quot;CreateCoreService&quot;,
+            &quot;param&quot;:[&#123;&quot;key1&quot;:&quot;value1&quot;&#125;, &#123;&quot;key2&quot;:&quot;value2&quot;&#125;]
+        &#125;
+        ...
+    ]
+&#125;
+</code></pre>
+<blockquote>
+<p>​		我想大家应该有概念了，就是通过Core去启动基础能力，Core将基础能力也通过配置插件的形式提供出来了，这样便能实现基础服务能力的定制，注意到<code>CorePlugin</code>被第一次提到，插件被作为我们用程序的基础能力提供出来，这样，Core通过加载（插件）实现了基础能力，基础能力中的<code>CorePlugin</code>再次通过加载插件，提供具体的业务逻辑，一个系统就这样成型了。</p>
+</blockquote>
+<pre><code class="C++">class Core
+&#123;
+public:
+      bool init(int argc, char** argv, char** envs);
+    bool getServer(std::string，IServer server);    
+    
+protected:
+    bool listAllCoreServices();
+    bool onBeforeArgs();
+    bool onAfterArgs();
+    bool onServerInit();
+    bool serverStart();
+    
+private:
+    std::map&lt;std::string, IServer&gt; m_servers; 
+&#125;;
+</code></pre>
+<blockquote>
+<p>在<code>IServer</code>中我们可以留出一套接口出来，做生命周期函数，在<code>Init</code>中加载服务的时候，我们允许<code>Iserver</code>的基类在事先事后做一些处理工作，OK，那么这个我们便基本处理好了，基础能力，接着我们看一下这个<code>CorePlugin</code>服务。</p>
+</blockquote>
+<p>我们的这些<code>IServer</code>实例肯定要通过动态库加载的，这里我想提一嘴，曾经看到过一个非常棒的设计，关于动态库模块加载的代码。通过智能指针管理动态加载模块，完美利用智能指针定制析构函数的能力，进行动态库的加载，这里完全是现代的C++风格代码，做到一个完美的内存管理。</p>
+<pre><code class="c++">//模块Module、插件Plugin的接口导出定义,返回值交给smart_ptr管理
+typedef Module* (*create_module)();
+typedef void (*destory_module)(Module*);
+
+std::shared_ptr&lt;Module&gt; Library::GetModule(const std::string&amp; path) &#123;
+    void* handle = dlopen(path.c_str(), RTLD_NOW);
+    if(!handle) &#123;
+        //cannot load library
+        return nullptr;
+    &#125;
+
+    create_module create = (create_module)dlsym(handle, &quot;CreateModule&quot;);
+    if(!create) &#123;
+        //&quot;cannot load symbol CreateModule&quot;
+        dlclose(handle);
+        return nullptr;
+    &#125;
+
+    destory_module destory = (destory_module)dlsym(handle, &quot;DestoryModule&quot;);
+    if(!destory) &#123;
+        //&quot;cannot load symbol DestoryModule
+        dlclose(handle);
+        return nullptr;
+    &#125;
+
+    //精髓在这里：模块导出交给Smart_ptr管理，模块的释放在具体的动态库里，不会出现堆的不安全问题
+    std::shared_ptr&lt;Module&gt; module(create(), ModuleCloser(handle, destory));
+    return module;
+&#125;
+
+
+//注意上面的ModuleCloser，作为module的定制析构方法，是用仿函数实现的，很巧妙
+class ModuleCloser &#123;
+public:
+    ModuleCloser(void* handle, destory_module d)
+        :m_handle(handle)
+        ,m_destory(d) &#123;
+    &#125;
+
+    void operator()(Module* module) &#123;
+        m_destory(module);
+        int rt = dlclose(m_handle);
+        if(rt) &#123;
+            //&quot;dlclose handle fail handle&quot;
+        &#125;
+    &#125;
+private:
+    void* m_handle;
+    destory_module m_destory;
+&#125;;
+</code></pre>
+<h3 id="CorePlugin服务"><a href="#CorePlugin服务" class="headerlink" title="CorePlugin服务"></a>CorePlugin服务</h3><p>​		现在我们需要想象一下了，这个<code>CorePlugin</code>怎么做？很显然，他要继承<code>IServer</code>实现<code>Core</code>即将调用的接口，并实现那些生命周期函数。</p>
+<pre><code class="C++">class CorePlugin : public IServer
+&#123;
+public:
+    virtual bool onBeforeArgs(int argc, char** argv, char** envs);
+    virtual bool onAfterArgs(int argc, char** argv, char** envs);
+    virtual bool onServerInit(Core core);  //加载插件，初始化
+    virtual bool serverStart();		//在CorePlugin里需要做的就是启动插件
+    
+protected:
+    bool listAllPlugins(); 
+    //作为插件管理基础服务类，应该提供插件向基础服务注册回调，获取基础服务能力的接口，比如获取http通信接口，注册查询通知
+    bool getNetAgent();
+    bool registeMessageNotify(xxx);
+    bool queryConcernMessage(xxx);
+private:
+    Core* m_CoreManager;
+    std::map&lt;std::string, IPlugin&gt; m_plugins;
+&#125;
+
+extern &quot;C&quot;
+&#123;
+    IServer* CreateCoreService()
+    &#123;
+        return new CorePlugin(params...);
+    &#125;
+    
+    void DestoryCoreService(IServer* s)
+    &#123;
+        delete s;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>这里<code>IPlugin</code>出现了，面向对象编程，哪能没有虚基类呢？不然我都想象不到扩展怎么进行下去，同时不得不感叹，没有<code>stl</code>，那可怎么办啊。solute！！<code>IPlugin</code>就是被<code>CorePlugin</code>的<code>m_plugins</code>管理起来了，<code>Plugin</code>怎么配置呢，又是仁者见仁，智者见智的问题了，配置格式需要根据业务需要去配置，配置文件选顺手的就行，但是总感觉<code>ini</code>这种的不太灵活，无法高度定制，建议谨慎使用。这里简单提供一个<code>Yaml</code>插件配置格式，仅供参考（也仅是参考了）</p>
+</blockquote>
+<pre><code class="yaml">name: HappyPlugin
+- path: /app/PluginSystem/plugins/
+- param: 
+    - key1: value1
+    - key2: value2
+name: SadPlugin
+- path: /app/PluginSystem/plugins/
+- param: 
+    - key1: value1
+    - key2: value2
+</code></pre>
+<h2 id="开开心心的做一个插件"><a href="#开开心心的做一个插件" class="headerlink" title="开开心心的做一个插件"></a>开开心心的做一个插件</h2><blockquote>
+<p>首先可能需要知道<code>IPlugin</code>是怎么定义的</p>
+</blockquote>
+<pre><code class="c++">class IPlugin
+&#123;
+public:
+    virtual bool PluginInit(); 	//可能去注册一些回调
+    virtual bool PluginStart();	//开展业务逻辑
+    
+    //下面是插件信息
+    virtual std::string getName();
+    virtual std::string getVersion();
+    virtual std::string getDiscription();
+private:
+    CorePlugin* m_CorePlugin;
+    //what you need
+&#125;
+</code></pre>
+<pre><code class="c++">class HappyPlugin()
+&#123;
+public:
+    virtual bool PluginInit();
+    virtual bool PluginStart();
+    
+    virtual std::string getName()&#123;return &quot;HappyPlugin&quot;;&#125;
+    virtual std::string getVersion()&#123;return &quot;1.0.0.1&quot;;&#125;
+    virtual std::string getDiscription()&#123;return &quot;be happy plugin&quot;;&#125;
+&#125;
+
+extern &quot;C&quot;
+&#123;
+    IPlugin* CreatePlugin()
+    &#123;
+        return new HappyPlugin();
+    &#125;
+    
+    void DestoryPlugin(IPlugin p)
+    &#123;
+        delete p;
+    &#125;
+    
+&#125;
+</code></pre>
+<h3 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h3><p>​		只是一个构想，大致的接口实现列举了出来，还有很多不完善的地方，例如:跨越动态库传递C++高级对象这个是不安全的，至少在windows下面是这样,所以这个最好是做一层抽象，搞一个KV查询的东西出来，方便进行数据传递，这个暂不设计本篇的内容了。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
