@@ -6,15 +6,15 @@
   <meta name="keywords" content="">
   <meta name="description" content="Boost-前言与编译 | Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
+<meta name="description" content="总览Boost 之 UUIDUUID介绍 UUID 是 通用唯一识别码（Universally Unique Identifier）的缩写,UUID是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的。通常平台会提供生成的API。按照开放软件基金会(OSF)制定的标准计算，用到了以太网卡地址、纳秒级时间、芯片ID码和随机数。可以轻松不需要中央认证机构创建全球唯一的标识。 UUID可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个插件系统的实现构想">
-<meta property="og:url" content="http://zdunking.github.io/2024/01/16/project_PluginSystem/index.html">
+<meta property="og:title" content="Boost-UUID">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/18/Boost_uuids/index.html">
 <meta property="og:site_name" content="Zdunk的个人博客">
-<meta property="og:description" content="一个插件系统的实现 ​		现在程序开发向着分布式方向发展，各种各样的分布式架构层出不群，网络少很少有人关注单个应用程序如何从零开始实现构建出扩展性强，配置性强的应用程序，因为大佬们都写好了，大名鼎鼎的Nginx，只要学会如何配置，那便学会了一半，业务逻辑基于现有体系开发就好了。我有时也在思考，如何构建一个这样的高度可配置，可定制的系统，它对于编写一大堆的防御式的业务代码来说，更具迷人的魅力。我个人">
+<meta property="og:description" content="总览Boost 之 UUIDUUID介绍 UUID 是 通用唯一识别码（Universally Unique Identifier）的缩写,UUID是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的。通常平台会提供生成的API。按照开放软件基金会(OSF)制定的标准计算，用到了以太网卡地址、纳秒级时间、芯片ID码和随机数。可以轻松不需要中央认证机构创建全球唯一的标识。 UUID可">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-16T14:28:32.000Z">
-<meta property="article:modified_time" content="2024-01-17T14:24:50.660Z">
+<meta property="article:published_time" content="2024-01-17T16:38:27.000Z">
+<meta property="article:modified_time" content="2024-01-17T17:05:42.316Z">
 <meta property="article:author" content="Zdunk的个人博客">
 <meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
 <meta name="twitter:card" content="summary">
@@ -116,7 +116,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(3)</small>
+                <small>(4)</small>
             
         </div>
     </li>
@@ -128,7 +128,7 @@
         <div data-rel="开源工具项目">
             <i class="fold iconfont icon-right"></i>
             开源工具项目
-            <small>(2)</small>
+            <small>(3)</small>
         </div>
         
             <ul class="sub hide">
@@ -138,7 +138,7 @@
         <div data-rel="开源工具项目&lt;---&gt;Boost">
             
             Boost
-            <small>(2)</small>
+            <small>(3)</small>
         </div>
         
     </li>
@@ -187,7 +187,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_posts_number" value="4">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -239,6 +239,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/18/Boost_uuids/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-UUID">Boost-UUID</span>
+            <span class="post-date" title="2024-01-18 00:38:27">2024/01/18</span>
+        </a>
         
         
         <a  class="全部文章 项目实战 "
@@ -307,7 +316,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-01-17 22:14:44'>2024-01-13 16:53</time>
+            发布时间 : <time class="date" title='最后更新: 2024-01-18 00:39:19'>2024-01-13 16:53</time>
         
     </div>
     <div class="article-meta">

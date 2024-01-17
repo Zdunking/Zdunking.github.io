@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Zdunk的个人博客</title>
+  <title>Boost-UUID | Zdunk的个人博客</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Zdunk的个人博客">
+  <meta name="description" content="Boost-UUID | Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="总览Boost 之 UUIDUUID介绍 UUID 是 通用唯一识别码（Universally Unique Identifier）的缩写,UUID是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的。通常平台会提供生成的API。按照开放软件基金会(OSF)制定的标准计算，用到了以太网卡地址、纳秒级时间、芯片ID码和随机数。可以轻松不需要中央认证机构创建全球唯一的标识。 UUID可">
 <meta property="og:type" content="article">
@@ -57,7 +57,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -292,12 +292,53 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Boost_uuids" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91"><span class="toc-text">关于我</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">Boost-UUID</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="开源工具项目">开源工具项目</a> > 
+            
+            <a  data-rel="开源工具项目&lt;---&gt;Boost">Boost</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-18 01:05:42'>2024-01-18 00:38</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E8%A7%88"><span class="toc-text">总览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Boost-%E4%B9%8B-UUID"><span class="toc-text">Boost 之 UUID</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UUID%E4%BB%8B%E7%BB%8D"><span class="toc-text">UUID介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%A2%9E%E5%BC%BA%E7%9A%84UUID%E7%B1%BB"><span class="toc-text">实现一个增强的UUID类</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -310,76 +351,132 @@
     }
 </style>
 </div>
-            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​		本站记录一些平时的工作学习的感悟和心得，作为个人的笔记站存在。计算机科学的世界纷繁庞大，每学习到一个新的知识，接触到一个新的领域，惊奇的同时又感叹于工程师伟大。恨不得把它们全都学会，但是工作接触项目才发现，一个软件工程，可能倾注了一个庞大项目组N多年的心血，所以学习者更需一步一个脚印，吃透知识，方可融汇贯通。</p>
-<p>​		虽然但是，还是想说，软件世界解决问题的方式虽多，却有迹可循，设计模式、架构思维，在深入细节过后回头来看，隐隐觉得细节变得不那么重要了。只是谁又能说完全的掌控全局呢？对于博客记录来说，仍然是一个积累的过程。所谓千里之行，始于足下，peace！</p>
-<p>​		下面根据知识类别做出划分，后续继续完善。</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><blockquote>
-<p>语言</p>
-<p>​	1.C++</p>
-<p>​	2.JavaScript</p>
-<p>​	3.Go</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><h1 id="Boost-之-UUID"><a href="#Boost-之-UUID" class="headerlink" title="Boost 之 UUID"></a>Boost 之 UUID</h1><h2 id="UUID介绍"><a href="#UUID介绍" class="headerlink" title="UUID介绍"></a>UUID介绍</h2><blockquote>
+<p>UUID 是 通用唯一识别码（Universally Unique Identifier）的缩写,UUID是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的。通常平台会提供生成的API。按照<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%80%E6%94%BE%E8%BD%AF%E4%BB%B6%E5%9F%BA%E9%87%91%E4%BC%9A/0?fromModule=lemma_inlink">开放软件基金会</a>(OSF)制定的标准计算，用到了以太网卡地址、纳秒级时间、芯片ID码和随机数。可以轻松不需要中央认证机构创建全球唯一的标识。</p>
+<p>UUID可以用在很多地方，数据库记录RawID，标识某个系统的用户，标识网络传输消息等。</p>
 </blockquote>
-<blockquote>
-<p>设计模式</p>
-<p>​	创建型</p>
-<p>​	结构型</p>
-<p>​	行为型</p>
-</blockquote>
-<blockquote>
-<p>Windows平台</p>
-<p>​	1.调试与Windbg专题</p>
-<p>​	2.CommonLib的封装</p>
-<p>​	3.逆向技术</p>
-<p>​	4.驱动技术</p>
-</blockquote>
-<blockquote>
-<p>Linux平台</p>
-<p>​	1.Linux那些强大的命令</p>
-<p>​	2.CommonLib的封装</p>
-</blockquote>
-<blockquote>
-<p>GUI</p>
-<p>​	1.MFC</p>
-<p>​	2.ATL</p>
-<p>​	3.WTL</p>
-<p>​	4.duilib</p>
-<p>​	5.electron		</p>
-<p>​	6.Qt</p>
-<p>​	7.GacUI</p>
-</blockquote>
-<blockquote>
-<p>前端技术</p>
-<p>​	1.WebPack</p>
-<p>​	2.JQuery</p>
-<p>​	3.Vue</p>
-<p>​	4.React</p>
-</blockquote>
-<blockquote>
-<p>项目实例</p>
-<p>​	1.高并发服务器实战</p>
-<p>​	2.高性能异步日志库的实现</p>
-<p>​	3.高性能注册与派发系统的实现</p>
-<p>​	4.一个插件系统的实现构想</p>
-</blockquote>
-<blockquote>
-<p>运维</p>
-<p>​	1.docker</p>
-<p>​	2.微服务</p>
-</blockquote>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题   <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签</li>
-<li>pad&#x2F;手机等移动端适配</li>
-</ul>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><pre><code class="c++">//uuid == GUID 全面支持比较操作和输入输出流，16个字节
+//uui没有统一的头文件、必要的话需要自定义头文件包含他们使用
+#include &lt;boost/uuid/uuid.hpp&gt;
+#include &lt;boost/uuid/uuid_generators.hpp&gt;
+#include &lt;boost/uuid/uuid_io.hpp&gt;
+using namespace boost::uuids;
+#define msgout(m) std::cout &lt;&lt; #m &lt;&lt; &quot;:[&quot; &lt;&lt; (m) &lt;&lt; &quot;]&quot; &lt;&lt; std::endl
+#include &lt;boost/lexical_cast.hpp&gt;
+void test_uuid()
+&#123;
+    uuid u;
+    msgout(uuid::static_size());
+    msgout(u.size());
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+    std::vector&lt;unsigned char&gt; v(16, 7);
+    std::copy(v.begin(), v.end(), u.begin());
+    msgout(u);
+
+    //全零的uuid认为是无效值
+    uuid u1;
+    std::fill_n(u1.begin(), u1.size(), 0);
+    msgout(u1.is_nil());
+
+    //比较操作被支持
+    msgout(u==u1);
+
+    //***********uuid生成器对象*************
+    //1.nil_generator
+    uuid U1 = nil_generator()();
+    msgout(U1);
+    msgout(U1==nil_uuid());
+    //2.string_generator()格式要匹配，不然抛异常
+    msgout(string_generator()(&quot;0123456789abcdef0123456789abcdef&quot;));
+    msgout(string_generator()(&quot;01234567-89ab-cdef-0123-456789abcdef&quot;));
+    msgout(string_generator()(L&quot;&#123;01234567-89ab-cdef-0123-456789abcdef&#125;&quot;));
+    //3.name_generator() 基于名字的sha1算法，首先提供基准
+    uuid U2 = string_generator()(&quot;0123456789abcdef0123456789abcdef&quot;);
+    name_generator ngen(U2);
+    uuid U21 = ngen(&quot;mario&quot;);
+    msgout(U21.version() == uuid::version_name_based_sha1);
+    msgout(U21);
+    uuid U22 = ngen(&quot;zdunk&quot;);
+    msgout(U22);
+    //4.随机生成器
+    random_generator rgne;
+    uuid U3 = rgne();
+    msgout(U3.version()==uuid::version_random_number_based);
+    msgout(U3);
+
+    //转换，传参时可能会用到
+    std::cout &lt;&lt; boost::uuids::to_string(U3) &lt;&lt; std::endl;
+    std::wcout &lt;&lt; boost::uuids::to_wstring(U3) &lt;&lt; std::endl;
+    std::cout &lt;&lt; boost::lexical_cast&lt;std::string&gt;(U3) &lt;&lt; std::endl;
+&#125;
+</code></pre>
+<h2 id="实现一个增强的UUID类"><a href="#实现一个增强的UUID类" class="headerlink" title="实现一个增强的UUID类"></a>实现一个增强的UUID类</h2><blockquote>
+<p>UUID虽然好用，但是生成它却必须使用UUID生成器，可以构封装一个UUID对象，派生boost的uuid类，自动产生对应类型的UUID，简化UUID的使用</p>
+</blockquote>
+<pre><code class="C++">#include &lt;boost/uuid/uuid.hpp&gt;
+#include &lt;boost/uuid/uuid_generators.hpp&gt;
+#include &lt;boost/uuid/uuid_io.hpp&gt;
+using namespace boost::uuids;
+
+class uuid_t : public uuid
+&#123;
+public:
+    uuid_t() : uuid(random_generator()())&#123;&#125;		//默认构造生成随机UUID
+    uuid_t(int) : uuid(nil_generator()())&#123;&#125;		//构造传int直接生成nil_uuid
+    
+    uuid_t(const char* str) : uuid(string_generator()(str))&#123;&#125;
+    uuid_t(const uuid&amp; u, const char* str) : uuid(name_generator(u)(str))&#123;&#125;
+    
+    //拷贝构造
+    explicit uuid_t(const uuid&amp; u) : uuid(u)&#123;&#125;
+    
+    //类型转换
+    operator uuid() &#123;return static_cast&lt;uuid&amp;&gt;(*this);&#125;
+    operator uuid() const &#123;return static_cast&lt;const uuid&amp;&gt;(*this);&#125;
+    
+&#125;;
+</code></pre>
+<blockquote>
+<p><code>uuid_t</code>的使用方法：</p>
+</blockquote>
+<pre><code class="C++">void test_uuid_t()
+&#123;
+    uuid_t u1;
+    uuid_t u2;
+    msgout(u1);
+    msgout(u2);
+
+    uuid_t u3(&quot;0123456789abcdef0123456789abcdef&quot;);
+    msgout(u3);
+
+    msgout(uuid_t(u3, &quot;zdunk&quot;));
+&#125;
+</code></pre>
+<p>方便很多，芜湖~</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -388,11 +485,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
