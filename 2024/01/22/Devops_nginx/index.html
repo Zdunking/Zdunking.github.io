@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>nginx学习记录 | Zdunk的个人博客</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="nginx学习记录 | Zdunk的个人博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="1. 一些基本概念1.1 Nginx初步认识 Nginx介绍  engine x  俄罗斯  开源的框架  c语言  Tengine - 淘宝基于nginx修改的    Nginx能干什么?  作为web服务器 解析http协议   反向代理服务器 了解反向代理的概念   邮件服务器 解析邮件相关的协议: pop3&#x2F;smtp&#x2F;imap     Nginx的优势?   更快  高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx学习记录">
+<meta property="og:url" content="http://zdunking.github.io/2024/01/22/Devops_nginx/index.html">
+<meta property="og:site_name" content="Zdunk的个人博客">
+<meta property="og:description" content="1. 一些基本概念1.1 Nginx初步认识 Nginx介绍  engine x  俄罗斯  开源的框架  c语言  Tengine - 淘宝基于nginx修改的    Nginx能干什么?  作为web服务器 解析http协议   反向代理服务器 了解反向代理的概念   邮件服务器 解析邮件相关的协议: pop3&#x2F;smtp&#x2F;imap     Nginx的优势?   更快  高">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/051157002507977.jpg">
+<meta property="og:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/4.png">
+<meta property="og:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/8.png">
+<meta property="og:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/1539680213601.png">
+<meta property="og:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/1539681085862.png">
+<meta property="article:published_time" content="2024-01-22T15:10:23.000Z">
+<meta property="article:modified_time" content="2024-01-22T16:09:01.188Z">
+<meta property="article:author" content="Zdunk的个人博客">
+<meta property="article:tag" content="Windows GUI Linux NetWork MutiThread">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zdunking.github.io/2024/01/22/Devops_nginx/051157002507977.jpg">
+
+
+<link rel="icon" href="/img/favicon.ico">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/zenbum.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Zdunk的个人博客</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/Zdunking"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:zhouqi2617@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2388024323&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(5)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="开源工具项目">
+            <i class="fold iconfont icon-right"></i>
+            开源工具项目
+            <small>(3)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="开源工具项目&lt;---&gt;Boost">
+            
+            Boost
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="项目实战">
+            
+            项目实战
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="运维知识">
+            
+            运维知识
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="5">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 运维知识 "
+           href="/2024/01/22/Devops_nginx/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="nginx学习记录">nginx学习记录</span>
+            <span class="post-date" title="2024-01-22 23:10:23">2024/01/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/18/Boost_uuids/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-UUID">Boost-UUID</span>
+            <span class="post-date" title="2024-01-18 00:38:27">2024/01/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 项目实战 "
+           href="/2024/01/16/project_PluginSystem/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="一个插件系统的实现构想">一个插件系统的实现构想</span>
+            <span class="post-date" title="2024-01-16 22:28:32">2024/01/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/14/Boost_%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-日期时间操作">Boost-日期时间操作</span>
+            <span class="post-date" title="2024-01-14 22:07:18">2024/01/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 开源工具项目 Boost "
+           href="/2024/01/13/Boost_%E5%89%8D%E8%A8%80%E4%B8%8E%E7%BC%96%E8%AF%91/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Boost-前言与编译">Boost-前言与编译</span>
+            <span class="post-date" title="2024-01-13 16:53:29">2024/01/13</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Devops_nginx" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">nginx学习记录</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="运维知识">运维知识</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-23 00:09:01'>2024-01-22 23:10</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">1. 一些基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Nginx%E5%88%9D%E6%AD%A5%E8%AE%A4%E8%AF%86"><span class="toc-text">1.1 Nginx初步认识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%AD%A3%E5%90%91-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">1.2 正向&#x2F;反向代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Nginx-%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="toc-text">2. Nginx 安装和配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%89%E8%A3%85"><span class="toc-text">2.1 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE"><span class="toc-text">2.2 配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Nginx%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">3. Nginx的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5"><span class="toc-text">3.1 部署静态网页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">3.2 反向代理和负载均衡</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-一些基本概念"><a href="#1-一些基本概念" class="headerlink" title="1. 一些基本概念"></a>1. 一些基本概念</h2><h3 id="1-1-Nginx初步认识"><a href="#1-1-Nginx初步认识" class="headerlink" title="1.1 Nginx初步认识"></a>1.1 Nginx初步认识</h3><ol>
+<li><p>Nginx介绍</p>
+<ul>
+<li><p>engine x</p>
+</li>
+<li><p>俄罗斯</p>
+</li>
+<li><p>开源的框架</p>
+</li>
+<li><p>c语言</p>
+</li>
+<li><p>Tengine - 淘宝基于nginx修改的</p>
+</li>
+</ul>
+</li>
+<li><p>Nginx能干什么?</p>
+<ul>
+<li>作为web服务器<ul>
+<li>解析http协议</li>
+</ul>
+</li>
+<li>反向代理服务器<ul>
+<li>了解反向代理的概念</li>
+</ul>
+</li>
+<li>邮件服务器<ul>
+<li>解析邮件相关的协议: pop3&#x2F;smtp&#x2F;imap</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Nginx的优势?</p>
+<blockquote>
+<ul>
+<li><p>更快</p>
+</li>
+<li><p>高峰期(数以万计的并发时)nginx可以比其它web服务器更快的响应请求</p>
+</li>
+<li><p>高扩展</p>
+</li>
+<li><p><strong>低耦合</strong>设计的模块组成,丰富的第三方模块支持</p>
+</li>
+<li><p>高可靠</p>
+</li>
+<li><p>经过大批网站检验</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.sina.com.cn/">www.sina.com.cn</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.xunlei.com/">www.xunlei.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.163.com/">www.163.com</a></li>
+</ul>
+</li>
+<li><p>每个worker进程相对独立, 出错之后可以快速开启新的worker</p>
+<ul>
+<li>worker进程的个数是可以控制的</li>
+<li>在后台干活的进程</li>
+</ul>
+</li>
+<li><p>低内存消耗</p>
+</li>
+<li><p>一般情况下,10000个非活跃的HTTP  Keep-Alive连接在nginx中仅消耗 2.5M内存</p>
+</li>
+<li><p>单机支持10万以上的并发连接</p>
+</li>
+<li><p>取决于内存,10万远未封顶</p>
+</li>
+<li><p>热部署</p>
+</li>
+<li><p>master和worker的分离设计,可实现7x24小时不间断服务的前提下升级nginx可执行文件</p>
+</li>
+<li><p>最自由的BSD许可协议</p>
+</li>
+<li><p>BSD许可协议允许用户免费使用nginx, 修改nginx源码,然后再发布</p>
+<ul>
+<li>淘宝: tengine</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h3 id="1-2-正向-反向代理"><a href="#1-2-正向-反向代理" class="headerlink" title="1.2 正向&#x2F;反向代理"></a>1.2 正向&#x2F;反向代理</h3><ol>
+<li><p>正向代理</p>
+<blockquote>
+<p>正向代理是位于客户端和原始服务器之间的服务器，为了能够从原始服务器获取请求的内容，客户端需要将请求发送给代理服务器，然后再由代理服务器将请求转发给原始服务器，原始服务器接受到代理服务器的请求并处理，然后将处理好的数据转发给代理服务器，之后再由代理服务器转发发给客户端，完成整个请求过程。 </p>
+<p>&#x3D;&#x3D;<strong>正向代理的典型用途就是为在防火墙内的局域网客户端提供访问Internet的途径</strong>&#x3D;&#x3D;, 比如: </p>
+<ul>
+<li>学校的局域网</li>
+<li>单位局域网访问外部资源</li>
+</ul>
+</blockquote>
+<p><img src="/2024/01/22/Devops_nginx/051157002507977.jpg"></p>
+<p>​	正向代理服务器是为用户服务的</p>
+<ol start="2">
+<li><p>反向代理</p>
+<blockquote>
+<p>反向代理方式是指代理原始服务器来接受来自Internet的链接请求，然后将请求转发给内部网络上的原始服务器，并将从原始服务器上得到的结果转发给Internet上请求数据的客户端。那么顾名思义，反向代理就是位于Internet和原始服务器之间的服务器，对于客户端来说就表现为一台服务器，客户端所发送的请求都是直接发送给反向代理服务器，然后由反向代理服务器统一调配。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<img src="/2024/01/22/Devops_nginx/4.png" width="80%">
+
+<ol>
+<li>客户端给服务器发送请求, 连接服务器, 用户不知道服务器地址, 只有反向代理服务器的地址是公开的</li>
+<li>请求直接发给反向代理服务器</li>
+<li>反向代理服务器将请求转发给后边的web服务器<ul>
+<li>web服务器 N 台</li>
+<li>反向代理服务器转发请求会轮询进行</li>
+</ul>
+</li>
+<li>web服务器收到请求进行处理, 得到结果</li>
+<li>web服务器将处理结果发送给反向代理服务器</li>
+<li>反向代理服务器将拿到的结果转发给客户端</li>
+</ol>
+<h2 id="2-Nginx-安装和配置"><a href="#2-Nginx-安装和配置" class="headerlink" title="2. Nginx 安装和配置"></a>2. Nginx 安装和配置</h2><h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a>2.1 安装</h3><ol>
+<li><p>下载</p>
+<blockquote>
+<ol>
+<li>官方地址: <a target="_blank" rel="noopener" href="http://nginx.org/">http://nginx.org/</a></li>
+<li>Nginx相关依赖:<ul>
+<li>OpenSSL: <a target="_blank" rel="noopener" href="http://www.openssl.org/">http://www.openssl.org/</a> <ul>
+<li>密码库</li>
+<li>使用https进行通信的时候使用</li>
+</ul>
+</li>
+<li>ZLib下载: <a target="_blank" rel="noopener" href="http://www.zlib.net/">http://www.zlib.net/</a> <ul>
+<li>数据压缩</li>
+<li>安装:<ul>
+<li>.&#x2F;configure</li>
+<li>make</li>
+<li>sudo make install</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PCRE下载:  <a target="_blank" rel="noopener" href="http://www.pcre.org/">http://www.pcre.org/</a> <ul>
+<li>解析正则表达式</li>
+<li>安装<ul>
+<li>.&#x2F;configure</li>
+<li>make</li>
+<li>sudo make install</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>安装</p>
+<ul>
+<li>nginx的安装</li>
+</ul>
+<pre><code class="shell"># nginx工作时候需要依赖三个库
+# 三个参数=这三个库对应的源码安装目录
+# 根据自己的电脑的库安装包的位置进行指定
+./configure --with-openssl=../openssl-1.0.1t --with-pcre=../pcre-8.40 --with-zlib=../zlib-1.2.11
+make
+sudo make install
+</code></pre>
+<p>Nginx 相关的指令</p>
+<ul>
+<li><p>Nginx的默认安装目录</p>
+<pre><code class="shell">/usr/local/nginx
+ conf -&gt; 存储配置文件的目录
+ html -&gt; 默认的存储网站(服务器)静态资源的目录 [图片, html, js, css]
+ logs -&gt; 存储log日志
+ sbin -&gt; 启动nginx的可执行程序
+</code></pre>
+</li>
+<li><p>Nginx可执行程序的路径</p>
+<pre><code class="shell">/usr/local/nginx/sbin/nginx
+# 快速启动的方式
+# 1. 将/usr/local/nginx/sbin/添加到环境变量PATH中
+# 2. /usr/local/nginx/sbin/nginx创建软连接, 放到PATH对应的路径中, 比如: /usr/bin
+ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
+</code></pre>
+</li>
+<li><p>启动Nginx - 需要管理器权限</p>
+<pre><code class="shell"># 假设软连接已经创建完毕
+sudo nginx # 启动
+</code></pre>
+</li>
+<li><p>关闭Nginx</p>
+<pre><code class="shell"># 第一种, 马上关闭
+sudo nginx -s stop
+# 第二种, 等nginx作为当前操作之后关闭
+sudo nginx -s quit
+</code></pre>
+</li>
+<li><p>重新加载Nginx</p>
+<pre><code class="shell">sudo nginx -s reload  # 修改了nginx的配置文件之后, 需要执行该命令
+</code></pre>
+</li>
+<li><p>测试是否安装成功</p>
+<ul>
+<li>知道nginx对应的主机的IP地址 - &gt; 192.168.1.100</li>
+<li>在浏览器中访问该IP地址<ul>
+<li>看到一个welcom nginx的欢迎界面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-配置"><a href="#2-2-配置" class="headerlink" title="2.2 配置"></a>2.2 配置</h3><ol>
+<li><p>Nginx配置文件的位置</p>
+<pre><code class="shell">/usr/local/nginx/conf/nginx.conf
+</code></pre>
+</li>
+<li><p>Nginx配置文件的组织格式</p>
+<p>![](E:&#x2F;项目实战与教学&#x2F;分布式服务器编程&#x2F;03 nginx&#x2F;day03&#x2F;5.png)</p>
+<ul>
+<li>http -&gt; 模块, http相关的通信设置<ul>
+<li>server模块 -&gt; 每个server对应的是一台web服务器<ul>
+<li>location 模块<ul>
+<li>处理的是客户端的请求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mail -&gt; 模块, 处理邮件相关的动作</li>
+</ul>
+</li>
+<li><p>常用配置项介绍</p>
+<pre><code class="nginx">user  nobody; # 启动之后的worker进程属于谁
+    - 错误提示: nginx操作xxx文件时候失败, 原因: Permission denied  
+    - 将nobody -&gt; root
+worker_processes  1; # 设置worker进程的个数, 最大 == cpu的核数 (推荐)
+error_log  logs/error.log; # 错误日志, /usr/local/nginx
+pid        logs/nginx.pid; # pid文件, 里边是nginx的进程ID
+# nginx的事件处理
+events &#123;
+     use epoll;	# 多路IO转接模型使用epoll
+     worker_connections  1024;	// 每个工作的进程的最大连接数
+&#125;
+http-&gt;server -&gt; 每个server模块可以看做一台web服务器
+server&#123;
+    listen       80;  # web服务器监听的端口, http协议的默认端口
+    server_name  localhost; # 对应一个域名, 客户端通过该域名访问服务器
+    charset utf8; 	# 字符串编码
+    location &#123;	// 模块, 处理客户端的请求
+&#125;
+
+# 客户端 (浏览器), 请求:
+  http://192.168.10.100:80/login.html
+# 服务器处理客户端的请求
+  服务器要处理的指令如何从url中提取?
+  - 去掉协议: http
+  - 去掉IP/域名+端口: 192.168.10.100:80
+  - 最后如果是文件名, 去掉该名字: login.html
+  - 剩下的: /
+  服务器要处理的location指令: 
+  location /
+  &#123;
+        处理动作
+  &#125;
+</code></pre>
+</li>
+</ol>
+<h2 id="3-Nginx的使用"><a href="#3-Nginx的使用" class="headerlink" title="3. Nginx的使用"></a>3. Nginx的使用</h2><h4 id="3-1-部署静态网页"><a href="#3-1-部署静态网页" class="headerlink" title="3.1 部署静态网页"></a>3.1 部署静态网页</h4><ol>
+<li><p>静态网页存储目录</p>
+<ul>
+<li><p>默认的存储目录: </p>
+<pre><code class="shell">/usr/local/nginx/html
+</code></pre>
+</li>
+<li><p>自己创建新的目录:</p>
+<pre><code class="shell">应该在 /usr/local/nginx/
+mkdir /usr/local/nginx/mydir
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>练习</p>
+<blockquote>
+<p>在Nginx服务器上进行网页部署, 实现如下访问:</p>
+<p>在&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;创建新的目录, yundisk用来存储静态网页</p>
+</blockquote>
+<ul>
+<li><p>访问地址: <a target="_blank" rel="noopener" href="http://192.168.80.254/login.html">http://192.168.80.254/login.html</a> </p>
+<ul>
+<li><p>login.html放到什么位置?</p>
+<pre><code class="shell">/ -&gt; 服务器的资源根目录, /usr/local/nginx/yundisk
+login.htm-&gt; 放到yundisk中
+</code></pre>
+</li>
+<li><p>服务器要处理的动作</p>
+<pre><code class="nginx"># 对应这个请求服务器要添加一个location
+location 指令(/)
+&#123;
+    # 找一个静态网页
+    root yundisk;  # 相对于/usr/local/nginx/来找
+    # 客户端的请求是一个目录, nginx需要找一默认显示的网页
+    index index.html index.htm;
+&#125;
+# 配置之后重启nginx
+sudo nginx -s reload
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>访问地址: <a target="_blank" rel="noopener" href="http://192.168.80.254/hello/reg.html">http://192.168.80.254/hello/reg.html</a> </p>
+<ul>
+<li><p>hello是什么?</p>
+<ul>
+<li>目录</li>
+</ul>
+</li>
+<li><p>reg.html放到哪儿?</p>
+<ul>
+<li>hello目录中</li>
+</ul>
+</li>
+<li><p>如何添加location</p>
+<pre><code class="nginx">location /hello/
+&#123;
+    root yundisk;
+    index xx.html;
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>访问地址: <a target="_blank" rel="noopener" href="http://192.168.80.254/upload/">http://192.168.80.254/upload/</a> 浏览器显示upload.html </p>
+<ul>
+<li><p>直接访问一个目录, 得到一默认网页</p>
+<ul>
+<li><p>upload是一个目录, uplaod.html应该再upload目录中</p>
+<pre><code class="nginx">location /upload/
+&#123;
+    root yundisk;
+    index upload.html;
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-2-反向代理和负载均衡"><a href="#3-2-反向代理和负载均衡" class="headerlink" title="3.2 反向代理和负载均衡"></a>3.2 反向代理和负载均衡</h4></li>
+</ol>
+<blockquote>
+<p>反向代理和负载均衡是两码事儿</p>
+</blockquote>
+<img src="/2024/01/22/Devops_nginx/8.png" width="80%">
+
+<p>准备工作:</p>
+<blockquote>
+<ol>
+<li>需要客户端 - 1个<ul>
+<li>Window中的浏览器作为客户端</li>
+</ul>
+</li>
+<li>反向代理服务器 -&gt; 1个<ul>
+<li>window作为反向代理服务器</li>
+</ul>
+</li>
+<li>web服务器 -&gt; 2个<ul>
+<li>ubuntu - robin: 192.168.247.135</li>
+<li>ubuntu - luffy : 192.168.26.250</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ol>
+<li>反向代理设置</li>
+</ol>
+<p><img src="/2024/01/22/Devops_nginx/1539680213601.png"></p>
+<pre><code class="nginx">找window上对应的nginx的配置文件
+    - conf/nginx.conf
+# 代理几台服务器就需要几个server模块
+    # 客户端访问的url: http://192.168.1.100/login.html
+    server &#123;
+        listen       80;        # 客户端访问反向代理服务器, 代理服务器监听的端口
+        server_name  ubuntu.com; # 客户端访问反向代理服务器, 需要一个域名
+        location / &#123;
+            # 反向代理服务器转发指令, http:// 固定
+            proxy_pass http://robin.test.com;
+        &#125;
+
+    &#125;
+    # 添加一个代理模块
+    upstream robin.test.com
+    &#123;
+        server 192.168.247.135:80;
+    &#125;
+    # luffy
+    server &#123;
+        listen       80;        # 客户端访问反向代理服务器, 代理服务器监听的端口
+        server_name  hello.com; # 客户端访问反向代理服务器, 需要一个域名
+        location / &#123;
+            # 反向代理服务器转发指令, http:// 固定
+            proxy_pass http://luffy.test.com;
+        &#125;
+
+    &#125;
+    # 添加一个代理模块
+    upstream luffy.test.com
+    &#123;
+        server 192.168.26.250:80;
+    &#125;
+&#125;
+</code></pre>
+<ol start="2">
+<li>负载均衡设置</li>
+</ol>
+<p><img src="/2024/01/22/Devops_nginx/1539681085862.png"></p>
+<pre><code class="nginx">    server &#123;
+        listen       80;         # 客户端访问反向代理服务器, 代理服务器监听的端口
+        server_name  localhost; # 客户端访问反向代理服务器, 需要一个域名
+        location / &#123;
+            # 反向代理服务器转发指令, http:// 固定的头
+            proxy_pass http://linux.com;
+        &#125;
+        location /hello/ &#123;
+            # 反向代理服务器转发指令, http:// 固定的头
+            proxy_pass http://linux.com;
+        &#125;
+        location /upload/ &#123;
+            # 反向代理服务器转发指令, http:// 固定的头
+            proxy_pass http://linux.com;
+        &#125;
+
+    &#125;
+    # 添加一个代理模块
+    upstream linux.com
+    &#123;
+        server 192.168.247.135:80 weight=1;
+        server 192.168.26.250:80 weight=3;
+    &#125;
+
+## =====================================
+web服务器需要做什么?
+# 192.168.247.135
+location /
+&#123;
+    root xxx;
+    index xxx;
+&#125;
+location /hello/ 
+&#123;
+    root xx;
+    index xxx;
+&#125;
+location /upload/ 
+&#123;
+    root xxx;
+    index xx;
+&#125;
+# 192.168.26.250
+location /
+&#123;
+    root xxx;
+    index xxx;
+&#125;
+location /hello/ 
+&#123;
+    root xx;
+    index xxx;
+&#125;
+location /upload/ 
+&#123;
+    root xxx;
+    index xx;
+&#125;
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 18px 3px 15px 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 582px;
+    }
+    .nav.fullscreen {
+        margin-left: -582px;
+    }
+    .nav-left {
+        width: 160px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
