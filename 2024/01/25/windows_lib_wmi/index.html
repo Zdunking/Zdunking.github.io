@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Zdunk的个人博客</title>
+  <title>windows-Wmi | Zdunk的个人博客</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Zdunk的个人博客">
+  <meta name="description" content="windows-Wmi | Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Windows  WMI 技术一、WMI简介 WMI（Windows Management Instrumentation, Windows管理规范）是Windows 2000&#x2F;XP管理系统的核心，属于管理数据和操作的基础模块。设计WMI的初衷是达到一种通用性，通过WMI操作系统、应用程序等来管理本地或者远程资源。它支持分布式组件对象模型（DCOM，Distribution Components">
 <meta property="og:type" content="article">
@@ -57,7 +57,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -359,12 +359,53 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-windows_lib_wmi" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91"><span class="toc-text">关于我</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">windows-Wmi</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Windows 平台">Windows 平台</a> > 
+            
+            <a  data-rel="Windows 平台&lt;---&gt;通用库">通用库</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-25 23:45:57'>2024-01-25 22:14</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows-WMI-%E6%8A%80%E6%9C%AF"><span class="toc-text">Windows  WMI 技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81WMI%E7%AE%80%E4%BB%8B"><span class="toc-text">一、WMI简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81WQL"><span class="toc-text">二、WQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81C-%E5%AE%9E%E7%8E%B0WMI%E6%9F%A5%E8%AF%A2%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-text">三、C++实现WMI查询计算机硬件信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%85%B6%E4%BB%96"><span class="toc-text">四、其他</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -377,76 +418,316 @@
     }
 </style>
 </div>
-            <h1 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​		本站记录一些平时的工作学习的感悟和心得，作为个人的笔记站存在。计算机科学的世界纷繁庞大，每学习到一个新的知识，接触到一个新的领域，惊奇的同时又感叹于工程师伟大。恨不得把它们全都学会，但是工作接触项目才发现，一个软件工程，可能倾注了一个庞大项目组N多年的心血，所以学习者更需一步一个脚印，吃透知识，方可融汇贯通。</p>
-<p>​		虽然但是，还是想说，软件世界解决问题的方式虽多，却有迹可循，设计模式、架构思维，在深入细节过后回头来看，隐隐觉得细节变得不那么重要了。只是谁又能说完全的掌控全局呢？对于博客记录来说，仍然是一个积累的过程。所谓千里之行，始于足下，peace！</p>
-<p>​		下面根据知识类别做出划分，后续继续完善。</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><blockquote>
-<p>语言</p>
-<p>​	1.C++</p>
-<p>​	2.JavaScript</p>
-<p>​	3.Go</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Windows-WMI-技术"><a href="#Windows-WMI-技术" class="headerlink" title="Windows  WMI 技术"></a>Windows  WMI 技术</h1><h2 id="一、WMI简介"><a href="#一、WMI简介" class="headerlink" title="一、WMI简介"></a>一、WMI简介</h2><blockquote>
+<p><code>WMI</code>（Windows Management Instrumentation, Windows管理规范）是<code>Windows 2000/XP</code>管理系统的核心，属于管理数据和操作的基础模块。设计<code>WMI</code>的初衷是达到一种通用性，通过<code>WMI</code>操作系统、应用程序等来管理本地或者远程资源。它支持分布式组件对象模型（<code>DCOM</code>，Distribution Components Object Model）和Windows远程管理<code>（WinRM）</code>，用户可通过<code>WMI</code>服务访问、配置、管理和监视Windows所有资源的功能。对于其他的<code>Win32</code>操作系统来讲，<code>WMI</code>是一个非常不错的插件，同时也是测试人员在攻防实战中的一个完美的<strong>”无文件攻击“</strong>入口途径。</p>
 </blockquote>
+<h2 id="二、WQL"><a href="#二、WQL" class="headerlink" title="二、WQL"></a>二、WQL</h2><p><code>WQL</code>也就是<code>WMI</code>的<code>SQL</code>。<code>WQL</code>的全称是<code>WMI Query Language</code>（Windows管理规范查询语言），主要用于查询<code>WMI</code>的所有托管资源。它的语法与<code>SQL</code>相似，但只能执行数据的查询，不能对类或者实例执行创建、删除、修改等操作。</p>
+<p>基础语法：</p>
+<pre><code class="sql">SELECT properties[, properties] FROM class [where clause]
+eg:
+SELECT * FROM WIN32_Process where Name Like &quot;%explorer%&quot;
+</code></pre>
 <blockquote>
-<p>设计模式</p>
-<p>​	创建型</p>
-<p>​	结构型</p>
-<p>​	行为型</p>
+<p>1）SELECT代表<code>WQL</code>语句开始。</p>
+<p>2）properties代表要查询的属性名称</p>
+<p>3）FROM指定包含SELECT语句中所列出属性的类。</p>
+<p>4）class代表要查询的类名称。</p>
+<p>5）where clause为可选项，代表要过滤的信息，用来定义搜索范围。</p>
 </blockquote>
-<blockquote>
-<p>Windows平台</p>
-<p>​	1.调试与Windbg专题</p>
-<p>​	2.CommonLib的封装</p>
-<p>​	3.逆向技术</p>
-<p>​	4.驱动技术</p>
-</blockquote>
-<blockquote>
-<p>Linux平台</p>
-<p>​	1.Linux那些强大的命令</p>
-<p>​	2.CommonLib的封装</p>
-</blockquote>
-<blockquote>
-<p>GUI</p>
-<p>​	1.MFC</p>
-<p>​	2.ATL</p>
-<p>​	3.WTL</p>
-<p>​	4.duilib</p>
-<p>​	5.electron		</p>
-<p>​	6.Qt</p>
-<p>​	7.GacUI</p>
-</blockquote>
-<blockquote>
-<p>前端技术</p>
-<p>​	1.WebPack</p>
-<p>​	2.JQuery</p>
-<p>​	3.Vue</p>
-<p>​	4.React</p>
-</blockquote>
-<blockquote>
-<p>项目实例</p>
-<p>​	1.高并发服务器实战</p>
-<p>​	2.高性能异步日志库的实现</p>
-<p>​	3.高性能注册与派发系统的实现</p>
-<p>​	4.一个插件系统的实现构想</p>
-</blockquote>
-<blockquote>
-<p>运维</p>
-<p>​	1.docker</p>
-<p>​	2.微服务</p>
-</blockquote>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题   <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
+<p>常用查询名：</p>
 <ul>
-<li>搜索支持文章标题、标签</li>
-<li>pad&#x2F;手机等移动端适配</li>
+<li>主机&#x2F;操作系统信息：<code>Win32_OperatingSystem </code>、<code>Win32_ComputerSystem</code></li>
+<li>文件&#x2F;目录列举：<code>CIM_DataFile</code></li>
+<li>磁盘卷列举：<code>Win32_Volume</code><ul>
+<li>注册表操作：<code>StdRegProv</code></li>
 </ul>
+</li>
+<li>运行进程：<code>Win32_Process</code></li>
+<li>服务列举:<code>Win32_Service</code></li>
+<li>事件日志：<code>Win32_NtLogEvent</code></li>
+<li>登录账户：<code>Win32_LoggedOnUser/Win32_LogonSession</code></li>
+<li>共享：<code>Win32_Share</code></li>
+<li>已安装补丁：<code>Win32_QuickFixEngineering</code></li>
+<li>网络信息：<code>Win32_IP4RouteTable</code></li>
+<li>用户账户：<code>Win32_UserAccount</code></li>
+<li>用户组：<code>Win32_Group</code></li>
+</ul>
+<h2 id="三、C-实现WMI查询计算机硬件信息"><a href="#三、C-实现WMI查询计算机硬件信息" class="headerlink" title="三、C++实现WMI查询计算机硬件信息"></a>三、C++实现WMI查询计算机硬件信息</h2><pre><code class="C++">class SysInfoQuery
+&#123;
+public:
+    bool init()&#123;
+        do&#123;
+            HRESULT errorCode = -1;
+            errorCode = CoInitializeEx(0, COINIT_MULTITHREADED);
+            if(FAILED(errorCode))&#123;
+                m_needCoUninitialize = false;
+                if(RPC_E_CHANGED_MODE != errorCode)&#123;
+                    //CoInitializeEx error
+                    break;
+                &#125;
+            &#125;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+            errorCode = CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, 0, NULL);
+            if(FAILED(errorCode))&#123;
+                if(RPC_E_TOO_LATE != errorCode)&#123;
+                    //CoInitializeSecurity error
+                    break;
+                &#125;
+            &#125;
+            //创建COM对象
+            errorCode = CoCreateInstance(CLSID_WbemAdministrativeLocator, 0, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&amp;m_pLoc);
+            if(FAILED(errorCode))&#123;
+                // CoCreateInstance error
+                break;
+            &#125;
+
+            errorCode = m_pLoc-&gt;ConnectServer(
+                _bstr_t(L&quot;ROOT\\CIMV2&quot;), // Object path of WMI namespace
+                NULL,                    // User name. NULL = current user
+                NULL,                    // User password. NULL = current
+                0,                       // Locale. NULL indicates current
+                NULL,                    // Security flags.
+                0,                       // Authority (e.g. Kerberos)
+                0,                       // Context object 
+                &amp;m_pSvc);
+            if(FAILED(errorCode))&#123;
+                //ConnectServer error : %d&quot;, errorCode);
+                break;
+            &#125;
+
+            errorCode = CoSetProxyBlanket(
+                m_pSvc,                        // Indicates the proxy to set
+                RPC_C_AUTHN_WINNT,           // RPC_C_AUTHN_xxx
+                RPC_C_AUTHZ_NONE,            // RPC_C_AUTHZ_xxx
+                NULL,                        // Server principal name 
+                RPC_C_AUTHN_LEVEL_CALL,      // RPC_C_AUTHN_LEVEL_xxx 
+                RPC_C_IMP_LEVEL_IMPERSONATE, // RPC_C_IMP_LEVEL_xxx
+                NULL,                        // client identity
+                EOAC_NONE                    // proxy capabilities 
+                );
+            if(FAILED(errorCode))&#123;
+            //CoSetProxyBlanket
+                break;
+            &#125;
+        &#125;while(false)
+
+        return TRUE;
+    &#125;
+    
+    HRESULT ExecQuery(const WCHAR* IpSql)&#123;
+        HRESULT errorCode = -1;
+        do&#123;
+            if(NULL == m_pSvc)&#123;
+                break;
+            &#125;
+            
+            errorCode = m_pSvc-&gt;ExecQuery(bstr_t(L&quot;WQL&quot;), bstr_t(IpSql), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, &amp;m_pEnumerator);
+            if(FAILED(errorCode))&#123;
+                //ExecQueryA ExecQuery  error
+                break;
+            &#125;
+            
+            uReturn = 0;
+            if(m_pEnumerator)&#123;
+                errorCode = m_pEnumerator-&gt;Next(WBEM_INFINITE, 1, &amp;m_pclsObj, &amp;uReturn);
+                if(FAILED(errorCode))&#123;
+                    //ExecQuery Next error 
+                    break;
+                &#125;
+                if(0 == uReturn)&#123;
+                    //ExecQuery
+                    break;
+                &#125;
+                return 0;
+            &#125;
+        &#125;while(false);
+        return errorCode;
+    &#125;
+
+    HRESULT QueryInfo(const WCHAR* IpName, void* OpBuffer, unsigned int IuBufferLen, bool INeedWcs = false)&#123;
+        HRESULT errorCode = -1;
+        _variant_t vtProp;
+        do&#123;
+
+
+            if(NULL == m_pclsObj || NULL == IpName || NULL == OpBuffer || sizeof(int) &gt; IuBufferLen)&#123;
+                //QueryInfo m_pclsObj is NULL or param error
+                errorCode = ERROR_INVALID_PARAMETER;
+                goto Throw;
+            &#125;
+
+            errorCode = m_pclsObj-&gt;Get(IpName, 0, &amp;vtProp, NULL, 0);
+            if(FAILED(errorCode))&#123;
+                //QueryInfo Get error 
+                goto Throw;
+            &#125;
+
+            switch(vtProp.vt)&#123; //value_type
+            case VT_NULL:
+                *((int*)OpBuffer) = 0;
+                break;
+
+            case VT_I4:
+                *((int*)OpBuffer) = vtProp.lVal;
+                break;
+
+            case wbemCimtypeDatetime: 
+            case wbemCimtypeString:
+                if(INeedWcs)&#123;
+                    StringCbCopy((PWCHAR)OpBuffer, IuBufferLen, vtProp.bstrVal);
+                &#125;else&#123;
+                    if(0 == WideCharToMultiByte(CP_ACP, NULL, vtProp.bstrVal, -1, (char*)OpBuffer, IuBufferLen, NULL, NULL))&#123;
+                        errorCode = GetLastError();
+                        //QueryInfo WideCharToMultiByte error
+                        break;
+                    &#125;
+                &#125;
+                break;
+
+            case wbemCimtypeBoolean:
+                *((int*)OpBuffer) = vtProp.boolVal ? 1 : 0;
+                break;
+            &#125;
+
+            return errorCode;
+        &#125;
+    &#125;
+    
+    
+private:
+    IWbemLocator* m_pLoc;
+    IWbemServices* m_pSvc;
+    IEnumWbemClassObject* m_pEnumerator;
+    IWbemClassObject* m_pclsObj;
+&#125;;
+</code></pre>
+<p>使用例子：</p>
+<pre><code class="c++">SysInfoQuery sysInfo;
+sysInfo.Init();
+//查询操作系统相关
+WCHAR buffer[2048];
+HRESULT hr = sysInfo.ExecQuery(L&quot;SELECT * FROM Win32_OperatingSystem&quot;);
+
+//操作系统名称
+hr = QueryInfo(L&quot;Caption&quot;, buffer, sizeof(buffer), true);  
+//操作系统升级包版本sp
+hr = QueryInfo(L&quot;CSDVersion&quot;, buffer, sizeof(buffer), true);  
+//操作系统代码
+hr = QueryInfo(L&quot;CodeSet&quot;, buffer, sizeof(buffer), true); 
+//操作系统版本
+hr = QueryInfo(L&quot;Version&quot;, buffer, sizeof(buffer), true);
+//语言
+DWORD uData;
+hr = QueryInfo(L&quot;OSLanguage&quot;, &amp;uData, sizeof(uData));  
+switch(uData)&#123;
+    case 2052:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;中文(简体,中国)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 4100:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;中文(简体,新加坡)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 1028:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;中文(繁體,台灣)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 3076:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;中文(繁體,香港)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 5124:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;中文(繁體,澳門)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 1041:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;日本語(日本)&quot;, CP_UTF8).m_psz;
+        break;
+
+        //case 1042:
+        //OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;한국어(대한민국)&quot;, CP_UTF8).m_psz;
+        //break;
+
+    case 1033:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(United States)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 2057:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(United Kingdom)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 3081:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(Australia)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 4105:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(Canada)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 15369:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(Hong Kong)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 16393:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(India)&quot;, CP_UTF8).m_psz;
+        break;
+
+    case 18441:
+        OrJsonValue[OS_LANG_ESI] = CW2A(L&quot;English(Singapore)&quot;, CP_UTF8).m_psz;
+        break;
+
+    default:
+        _itow_s(uData, buffer, 10);
+        OrJsonValue[OS_LANG_ESI] = CW2A(buffer, CP_UTF8).m_psz;
+        break;
+    &#125;
+//操作系统核心类型
+hr = QueryInfo(L&quot;BuildType&quot;, buffer, sizeof(buffer), true);
+//操作系统安装时间
+hr = QueryInfo(L&quot;InstallDate&quot;, buffer, sizeof(buffer));  
+//操作系统安装目录
+hr = QueryInfo(L&quot;WindowsDirectory&quot;, buffer, sizeof(buffer), true);
+//本次开机时间
+hr = QueryInfo(L&quot;LastBootUpTime&quot;, buffer, sizeof(buffer));  
+
+//授权信息
+//注册人
+hr = QueryInfo(L&quot;RegisteredUser&quot;, buffer, sizeof(buffer), true);
+//注册组织
+hr = QueryInfo(L&quot;Organization&quot;, buffer, sizeof(buffer), true);  
+//产品id
+hr = QueryInfo(L&quot;SerialNumber&quot;, buffer, sizeof(buffer), true);  
+
+//获取域信息
+hr = ExecQuery(L&quot;SELECT UserName, Domain FROM Win32_ComputerSystem&quot;);
+//工作组名会被作为域名
+hr = QueryInfo(L&quot;Domain&quot;, buffer, sizeof(buffer), true);  
+</code></pre>
+<h2 id="四、其他"><a href="#四、其他" class="headerlink" title="四、其他"></a>四、其他</h2><p><code>WMI</code>技术还提供了事件订阅的功能,能注册事件并对事件做出一些动作，同时<code>Powershell</code>作为windows脚本语言，能很好的执行<code>WMI</code>相关查询操作</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -455,11 +736,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
