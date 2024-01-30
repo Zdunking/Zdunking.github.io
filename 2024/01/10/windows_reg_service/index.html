@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Boost-前言与编译 | Zdunk的个人博客</title>
+  <title>Window服务注册表项的字段解析 | Zdunk的个人博客</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Boost-前言与编译 | Zdunk的个人博客">
+  <meta name="description" content="Window服务注册表项的字段解析 | Zdunk的个人博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Windows  WMI 技术一、WMI简介 WMI（Windows Management Instrumentation, Windows管理规范）是Windows 2000&#x2F;XP管理系统的核心，属于管理数据和操作的基础模块。设计WMI的初衷是达到一种通用性，通过WMI操作系统、应用程序等来管理本地或者远程资源。它支持分布式组件对象模型（DCOM，Distribution Components">
 <meta property="og:type" content="article">
@@ -370,9 +370,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Boost_前言与编译" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-windows_reg_service" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Boost-前言与编译</h1>
+        <h1 class="article-title">Window服务注册表项的字段解析</h1>
     
     <div class="article-meta">
         
@@ -382,9 +382,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="开源工具项目">开源工具项目</a> > 
-            
-            <a  data-rel="开源工具项目&lt;---&gt;Boost">Boost</a>
+            <a  data-rel="Windows平台">Windows平台</a>
             
         </span>
         
@@ -392,7 +390,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-01-18 00:39:19'>2024-01-13 16:53</time>
+            发布时间 : <time class="date" title='最后更新: 2024-01-30 22:58:19'>2024-01-10 12:16</time>
         
     </div>
     <div class="article-meta">
@@ -414,7 +412,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Boost%E5%89%8D%E8%A8%80"><span class="toc-text">Boost前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Boost%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-text">Boost的编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E5%91%BD%E4%BB%A4"><span class="toc-text">所有命令 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-text">参数说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E5%BA%93%EF%BC%9A"><span class="toc-text">编译指定库：</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Window%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E8%A1%A8%E9%A1%B9%E7%9A%84%E5%AD%97%E6%AE%B5%E8%A7%A3%E6%9E%90"><span class="toc-text">Window服务注册表项的字段解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ImagePath"><span class="toc-text">ImagePath</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Start"><span class="toc-text">Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-%E7%B1%BB%E5%9E%8B"><span class="toc-text">Type 类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-values"><span class="toc-text">Other values</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -430,51 +428,75 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Boost前言"><a href="#Boost前言" class="headerlink" title="Boost前言"></a>Boost前言</h1><p>Boost作为准标准库，提供了比标准库还丰富的工具和组件，在那个C++标准库还没有统一不同平台下的线程、日期、同步机制的C++03甚至更早，Boost就将他们统一了起来，伟大之处不用多说，更重要的是，Boost源码中相较于C++标准库的源代码，可读性大大增强，对学习编程者的思想很有帮助，对我学习泛型编程和了解标准库的实现提供了一条可行的路径。</p>
-<h1 id="Boost的编译"><a href="#Boost的编译" class="headerlink" title="Boost的编译"></a>Boost的编译</h1><p>编译器：VC++ 2017  15.9.1  1916<br>源码地址 : <a target="_blank" rel="noopener" href="https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip">https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.zip</a></p>
-<h3 id="所有命令"><a href="#所有命令" class="headerlink" title="所有命令 :"></a>所有命令 :</h3><pre><code class="powershell">cd boost_1_68_0 // 进入代码根目录
-.\bootstrap.bat // 编译编译工具b2/bjam，这两个是一样的东西
-bjam stage --toolset=msvc-14.1 link=static runtime-link=static threading=multi debug release cxxflags=&quot;/Zc:threadSafeInit- &quot; // 编译命令
+        <h1 id="Window服务注册表项的字段解析"><a href="#Window服务注册表项的字段解析" class="headerlink" title="Window服务注册表项的字段解析"></a>Window服务注册表项的字段解析</h1><blockquote>
+<p>驱动程序下 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services</code> 的每个子项是服务程序或驱动程序的的配置项，无论是驱动还是符合服务控制协议的 Win32 程序。都通过这个项配置服务的一些基本信息，通过这个项，基本可以了解的信息如下：</p>
+</blockquote>
+<blockquote>
+<p>1.驱动程序可以使用此子项来存储所需的数据</p>
+<p>2.当 PnP 管理器使用其 <code>DriverEntry()</code> 函数初始化驱动程序时，它会将此项的注册表路径传递给函数。</p>
+<p>3.Parameters 子项（可选）存储特定于驱动程序的数据。</p>
+<p>4.Performance 子项 （可选）用于性能监视。</p>
+</blockquote>
+<h2 id="ImagePath"><a href="#ImagePath" class="headerlink" title="ImagePath"></a>ImagePath</h2><blockquote>
+<p><code>ImagePath</code> 存储驱动程序映像文件的绝对路径。通常，该值类似于 <code>%SystemRoot%\System32\drivers\driverName.sys</code> 。但是，有时也会看到对以下内容的 <code>svchost.exe</code> 引用，例如：</p>
+</blockquote>
+<pre><code class="bat">%SystemRoot%\System32\svchost.exe -k netsvcs -p
 </code></pre>
-<h3 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h3><pre><code class="powershell">architecture是指定处理器架构，arm/mips等，这里不用指定。参考：https://www.boost.org/doc/libs/1_55_0/doc/html/bbv2/reference.html
-cxxflags=&quot;/Zc:threadSafeInit- &quot;这个一定要加，是为了兼容xp上运行
-</code></pre>
-<h3 id="编译指定库："><a href="#编译指定库：" class="headerlink" title="编译指定库："></a>编译指定库：</h3><pre><code class="powershell">bjam --with-atomic stage --toolset=msvc-14.1 address-model=32 link=static runtime-link=static threading=multi debug release cxxflags=&quot;/Zc:threadSafeInit- &quot;
-</code></pre>
-<pre><code class="powershell">./b2 --show-libraries
-</code></pre>
-<p>The following libraries require building:</p>
-<pre><code>- atomic
-    - chrono
-    - container
-    - context
-    - contract
-    - coroutine
-    - date_time
-    - exception
-    - fiber
-    - filesystem
-    - graph *
-    - graph_parallel *
-    - iostreams
-    - locale
-    - log
-    - math *
-    - mpi *
-    - program_options
-    - python *
-    - random
-    - regex
-    - serialization
-    - signals
-    - stacktrace
-    - system
-    - test
-    - thread
-    - timer
-    - type_erasure
-    - wave
-</code></pre>
+<blockquote>
+<p>此值由驱动程序 <code>.inf</code> 文件的强制 <code>ServiceBinary</code> 输入创建。</p>
+</blockquote>
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><blockquote>
+<p>“start”指定如何或何时启动服务：</p>
+</blockquote>
+<ul>
+<li>0：由引导加载程序加载（但未启动）。然后在内核初始化期间启动。</li>
+<li>1：在内核初始化期间，在 start 参数为 0 的服务之后启动。</li>
+<li>2：自动。由 <code>smss.exe</code> （会话管理器）或 <code>services.exe</code> （服务控制器）启动。</li>
+<li>3：手动。由服务控制管理器 （SCM） 启动。</li>
+<li>4: Disabled 4：已禁用</li>
+<li>5: Delayed start. 5：延迟启动。</li>
+</ul>
+<blockquote>
+<p>起始值 1 表示这是内核设备或其他低级硬件设备驱动程序。对于适配器，将忽略起始值。在 <code>msconfig.exe</code>的“服务”选项页 下提供了一种方便的方法来禁止或保持服务的原始启动类型（以便以后再次启用）。</p>
+</blockquote>
+<h2 id="Type-类型"><a href="#Type-类型" class="headerlink" title="Type 类型"></a>Type 类型</h2><blockquote>
+<p>type 值指定服务的类型：</p>
+</blockquote>
+<ul>
+<li>0x01：内核设备驱动</li>
+<li>0x02：文件系统驱动程序（也是内核设备驱动程序）</li>
+<li>0x04：适配器的参数集</li>
+<li>0x10：可由服务控制器启动并遵守服务控制协议的 Win32 程序。</li>
+<li>0x20：可以与其他 Win32 服务共享进程的 Win32 服务。(暂未接触过)</li>
+<li>0x60：USER_SHARE_PROCESS模板（暂未接触过）</li>
+<li>0xE0：USER_SHARE_PROCESS实例（暂未接触过）</li>
+</ul>
+<h2 id="Other-values"><a href="#Other-values" class="headerlink" title="Other values"></a>Other values</h2><blockquote>
+<p>其他可见值包括：</p>
+</blockquote>
+<ul>
+<li>BootFlags BootFlags（引导标志）</li>
+<li>ConfigurationFlags 配置标志</li>
+<li>DelayedAutostart 延迟自动启动</li>
+<li>DependOnGroup 依赖组</li>
+<li>DependOnService 依赖服务</li>
+<li>Description 描述</li>
+<li>DisplayName 显示名称</li>
+<li>DriverPackageId</li>
+<li>ErrorControl 错误控制</li>
+<li>FailureActions FailureActions（失败操作）</li>
+<li>FailureActionsOnNonCrashFailures</li>
+<li>FailureCommand</li>
+<li>Group 群</li>
+<li>HasBootConfig</li>
+<li>NdisMajorVersion</li>
+<li>NdisMinorVersion</li>
+<li>ObjectName (which seems to refer to an account such as <em>NT AUTHORITY\NetworkService</em>?)<br>ObjectName（似乎指的是 NT AUTHORITY\NetworkService 等帐户？</li>
+<li>Options 选项</li>
+<li>PreshutdownTimeout</li>
+<li>RebootMessage</li>
+<li>RequiredPrivileges 必需权限</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以邮件至 zhouqi2617@qq.com </span>
